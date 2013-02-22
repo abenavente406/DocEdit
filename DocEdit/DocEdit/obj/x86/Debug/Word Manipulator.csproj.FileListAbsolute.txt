@@ -1,0 +1,17 @@
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\bin\Debug\Word Manipulator.exe
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\bin\Debug\Word Manipulator.pdb
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\bin\Debug\Interop.AcroPDFLib.dll
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\bin\Debug\AxInterop.AcroPDFLib.dll
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\obj\x86\Debug\Interop.AcroPDFLib.dll
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\obj\x86\Debug\AxInterop.AcroPDFLib.dll
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\obj\x86\Debug\Word Manipulator.csproj.ResolveComReference.cache
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\obj\x86\Debug\Word_Manipulator.Form1.resources
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\obj\x86\Debug\Word_Manipulator.Properties.Resources.resources
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\obj\x86\Debug\Word Manipulator.csproj.GenerateResource.Cache
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\obj\x86\Debug\Word Manipulator.exe
+C:\Users\Anthony Benavente\AppData\Local\Temporary Projects\Word Manipulator\obj\x86\Debug\Word Manipulator.pdb
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\Interop.AcroPDFLib.dll
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\AxInterop.AcroPDFLib.dll
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\Word Manipulator.csproj.ResolveComReference.cache
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\Word Manipulator.exe
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\Word Manipulator.pdb

@@ -1,0 +1,12 @@
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\Interop.AcroPDFLib.dll
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\AxInterop.AcroPDFLib.dll
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\DocEdit.csproj.ResolveComReference.cache
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\bin\Debug\Doc Edit.exe
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\bin\Debug\Doc Edit.pdb
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\bin\Debug\Interop.AcroPDFLib.dll
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\bin\Debug\AxInterop.AcroPDFLib.dll
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\DocEdit.Form1.resources
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\DocEdit.Properties.Resources.resources
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\DocEdit.csproj.GenerateResource.Cache
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\Doc Edit.exe
+C:\Users\Anthony Benavente\Documents\Visual Studio 2010\Projects\DocEdit\Word Manipulator\obj\x86\Debug\Doc Edit.pdb
