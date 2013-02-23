@@ -5,71 +5,204 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
+using System.Diagnostics;
+using Microsoft.Office.Interop;
 
 namespace DocEdit
 {
     public partial class Form1 : Form
     {
         #region Fields
+        // The word application to handle MSWord operations
+        Microsoft.Office.Interop.Word.Application wordApp = 
+            new Microsoft.Office.Interop.Word.Application();
 
-        
-            //        Dim wordApp As New Word.Application
+        // Create the documents to be manipulated
+        Microsoft.Office.Interop.Word.Document loadedDoc =
+            new Microsoft.Office.Interop.Word.Document();
+        Microsoft.Office.Interop.Word.Document tmpDoc =
+            new Microsoft.Office.Interop.Word.Document();
 
-            //Dim loadedDoc As Word.Document
-            //Dim tmpDoc As New Word.Document
-
-            //Dim pgNums As Integer
-            //Dim tmpFilePathDir As String = My.Application.Info.DirectoryPath
-
-            //Dim hasLoaded As Boolean = False
+        private int   pgNums   = 0;
+        private bool hasLoaded = false;
+        private string tmpFilePath = System.IO.Directory.GetCurrentDirectory();
         #endregion
 
+        #region Controls
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void btnLoadFile_Click(object sender, EventArgs e)
+        {
+            openFileDialog.ShowDialog();
+        }
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                var fileInfo = new System.IO.FileInfo(openFileDialog.FileName);
+
+                // If the file is bigger than 30 mb
+                if (fileInfo.Length * (9.35 * Math.Pow(10, -7)) > 30)
+                    MessageBox.Show("This is a relatively large file.  Please allow load times in between 1 - 2 minutes.",
+                        "BIG FILE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                loadedDoc = wordApp.Documents.Open(openFileDialog.FileName);
+                tmpDoc = wordApp.Documents.Add();
+
+                loadedDoc.Content.Copy();
+                tmpDoc.Content.Paste();
+
+                hasLoaded = true;
+
+                this.Size = new Size(Screen.GetWorkingArea(this.Bounds).Width,
+                    Screen.GetWorkingArea(this.Bounds).Height);
+                this.Location = new Point(0, 0);
+
+                lblLoadedFile.Text = "Loaded Doc: " + loadedDoc.Path + "\\" + loadedDoc.Name;
+                stslblFileLoaded.Text = "File Loaded: True";
+                pgNums = loadedDoc.ComputeStatistics(Microsoft.Office.Interop.Word.WdStatistic.wdStatisticPages);
+                lblPagesInDoc.Text = "Pages in Document: " + pgNums.ToString();
+
+                SaveTempPDF();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                PrintErrorMessage("ERROR! The document failed to load.  Either" +
+                    " the document is in use or you don't have permission to open it.", ex);
+            }
+            catch (Exception ex)
+            {
+                PrintErrorMessage("ERROR! Could not open the file.", ex);
+            }
+        }
+
+        private void btnSaveFile_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.ShowDialog();
+        }
+        private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (saveFileDialog.FilterIndex == 0)
+                {
+                    // Save the document as a pdf
+                    tmpDoc.SaveAs2(saveFileDialog.FileName, FileFormat:
+                        Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF);
+                }
+                else
+                {
+                    // Save the document as a .doc
+                    tmpDoc.SaveAs2(saveFileDialog.FileName, FileFormat:
+                        Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault);
+                }
+            }
+            catch (Exception ex)
+            {
+                PrintErrorMessage("ERROR! Could not save the file.", ex);
+            }
+        }
+
         private void btnExecute_Click(object sender, EventArgs e)
         {
+            if (chkDelSlideNums.Checked)
+                DeleteSlideNums();
 
+            if (chkScaleSlides.Checked)
+                ScaleImage();
+
+            SaveTempPDF();
+            MessageBox.Show(this, "Finished executing tasks.", "Finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            pbExecutionStatus.Value = 100;
+            lblPercentage.Text = "100%";
         }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            PreviewPDF();
+        }
+        
+        private void btnUnload_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(this, "WARNING! This feature is very unstable.  Will you still continue?",
+                "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Reset();
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (hasLoaded)
+                if (AttemptCloseProgram())
+                    Debug.Print("Closed with no errors!");
+
+            try
+            {
+                foreach (Process p in Process.GetProcessesByName("winword"))
+                {
+                    p.Kill();
+                    p.WaitForExit();
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                PrintErrorMessage("ERROR! A winword task doesn't exist!", ex);
+            }
+            catch (Exception ex)
+            {
+                PrintErrorMessage("ERROR! Could not exit a winword task.", ex);
+            }
+        }
+        
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutBox1().ShowDialog();
+        }
+        #endregion
 
         #region Tasks
         private void DeleteSlideNums()
         {
+            // Find and delete the numbers + 
+            for (int i = 1; i <= pgNums; i++)
+            {
+                tmpDoc.Content.Find.Execute(FindText:"Slide " + i.ToString() + "\n\n", ReplaceWith: "",
+                    Replace: Microsoft.Office.Interop.Word.WdReplace.wdReplaceAll,
+                    Wrap: Microsoft.Office.Interop.Word.WdFindWrap.wdFindContinue);
 
-            //    For i As Integer = 1 To pgNums
-            //        tmpDoc.Content.Find.Execute(FindText:=i.ToString & vbCr & vbCr, ReplaceWith:="", Replace:=Word.WdReplace.wdReplaceAll, Wrap:=Word.WdFindWrap.wdFindContinue)
+                pbExecutionStatus.Value = (i / pgNums) * 50;
+                lblPercentage.Text = pbExecutionStatus.Value.ToString() + "%";
 
-            //        pbStatus.Value = (i / pgNums) * 50
-            //        lblPercent.Text = pbStatus.Value & "%"
-            //    Next
-
-            //    tmpDoc.Content.Find.Execute(FindText:="Slide", ReplaceWith:="", Replace:=Word.WdReplace.wdReplaceAll, Wrap:=Word.WdFindWrap.wdFindContinue)
-
-            //End Sub
+            }
         }
 
         private void ScaleImage()
         {
-            //        Private Sub scaleImage()
-            //    Static i As Integer = 0
+            int tmpStatusVal = 0;
+            int    counter   = 0;
 
-            //    Dim pict As Word.InlineShape
-            //    Dim tmpStatusVal As Integer = 0
+            foreach (Microsoft.Office.Interop.Word.InlineShape pict in tmpDoc.InlineShapes)
+            {
+                pict.ScaleWidth = 100;
+                pict.ScaleHeight = 100;
 
-            //    For Each pict In tmpDoc.InlineShapes
-            //        pict.ScaleHeight = 100
-            //        pict.ScaleWidth = 100
+                tmpStatusVal = (counter / pgNums) * 50;
+                pbExecutionStatus.Value = tmpStatusVal + 50;
+                lblPercentage.Text = pbExecutionStatus.Value.ToString() + "%";
 
-            //        tmpStatusVal = (i / pgNums) * 50
-            //        pbStatus.Value = tmpStatusVal + 50
-            //        lblPercent.Text = pbStatus.Value & "%"
-
-            //        i += 1
-            //    Next
-            //End Sub
+                counter += 1;
+            }
         }
         #endregion
 
@@ -88,94 +221,68 @@ namespace DocEdit
 
         private void SaveTempPDF()
         {
-            //    Dim tmpFilePath As String = My.Application.Info.DirectoryPath & "\preview.pdf"
-            //    tmpDoc.SaveAs2(FileName:=tmpFilePath, FileFormat:=Word.WdSaveFormat.wdFormatPDF)
-            //    updatePdfReader(tmpFilePath)
+            string tmpFilePath = System.IO.Directory.GetCurrentDirectory() + "\\preview.pdf";
+            tmpDoc.SaveAs2(FileName:tmpFilePath, FileFormat:Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF);
+            UpdatePDFReader(tmpFilePath);
         }
 
-        private void UpdatePDFReader()
+        private void UpdatePDFReader(string tempFilePath)
         {
-            //    pdfReader.LoadFile(tmpFilePath)
-            //    pdfReader.Refresh()
+            pdfReader.LoadFile(tmpFilePath);
+            pdfReader.Refresh();
         }
 
         private void PreviewPDF()
         {
-            //        Private Sub previewPDF()
+            // Creates a temporary file called preview.pdf
+            string tmpFilePath = this.tmpFilePath + "\\tmpPreview.pdf";
+            tmpDoc.SaveAs2(FileName: tmpFilePath, FileFormat: Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF);
 
-            //    ' Create the temp file called preview.pdf
-            //    Dim tmpFilePath As String = My.Application.Info.DirectoryPath & "\tmpPreview.pdf"
-            //    tmpDoc.SaveAs2(FileName:=tmpFilePath, FileFormat:=Word.WdSaveFormat.wdFormatPDF)
-            //    ' Start and wait for the process to finish
-            //    Dim tmpProcess As Process = Process.Start(tmpFilePath)
-            //    tmpProcess.WaitForExit()
+            Process adobeReader = Process.Start(tmpFilePath);
+            adobeReader.WaitForExit();
 
-            //    ' Check if the tmp file can be deleted
-            //    Try
-            //        Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(tmpFilePath)
-            //    Catch ex As Exception
-            //        printErrorMessage(ex.Message)
-            //    End Try
-
-            //End Sub
+            try
+            {
+                System.IO.File.Delete(tmpFilePath);
+            }
+            catch (IOException e)
+            {
+                Debug.Print("File not found! \n\n" + e.ToString());
+            }
         }
 
         private void Reset()
         {
-            //            Private Sub resetProgram()
-            //    attemptCloseProgram()
-            //    wordApp = New Word.Application
-
-            //    lblLoad.Text = "Loaded Document: None"
-            //    pgNums = 0
-            //    lblPages.Text = "Pages in Document: " & pgNums.ToString
-            //    stslblFileLoaded.Text = "File Loaded: False"
-
-            //End Sub
+            if (AttemptCloseProgram())
+                Debug.Print("Closed with no errors!");
+            wordApp = new Microsoft.Office.Interop.Word.Application();
+            
+            pgNums = 0;
+            lblLoadedFile.Text    = "Loaded Doc: None";
+            stslblFileLoaded.Text = "File Loaded: False";
+            lblPagesInDoc.Text    = "Pages in Document: " + pgNums.ToString();
         }
 
         private bool AttemptCloseProgram()
         {
-            //        Private Sub attemptCloseProgram()
-            //    If hasLoaded Then
-            //        Try
-            //            loadedDoc.Close()
-            //        Catch ex As Exception
-            //            printErrorMessage("Couldn't close loadedDoc.", ex)
-            //        End Try
-            //        Try
-            //            tmpDoc.SaveAs2(My.Application.Info.DirectoryPath & "\temp", Word.WdSaveFormat.wdFormatDocument97)
-            //        Catch ex As Exception
-            //            printErrorMessage("Could not save tmpDoc.")
-            //        End Try
-            //        Try
-            //            Debug.WriteLine(tmpDoc.Path)
-            //            tmpDoc.Close()
-            //        Catch ex As Exception
-            //            printErrorMessage("Could not close tmpDoc.")
-            //        End Try
-            //        Try
-            //            wordApp.Quit()
-            //        Catch ex As Exception
-            //            printErrorMessage("FATAL ERROR. Could not quit wordApp_1. Go to task manager and close the task.")
-            //        End Try
-            //        Try
-            //            Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(tmpFilePathDir & "\preview.pdf")
-            //        Catch ex As Exception
-            //            printErrorMessage("Could not find the temporary file")
-            //        End Try
-            //        Try
-            //            Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(tmpFilePathDir & "\temp.doc")
-            //        Catch ex As Exception
-            //            printErrorMessage("Could not find " & tmpDoc.Path)
-            //        End Try
+            if (hasLoaded)
+            {
+                try
+                {
+                    loadedDoc.Close(false);
+                    tmpDoc.Close(false);
+                    System.IO.File.Delete(tmpFilePath + "\\preview.pdf");
+                }
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.ToString());
+                    return false;
+                }
 
-            //        hasLoaded = False
-
-            //        pbStatus.Value = 0
-            //        lblPercent.Text = "0%"
-            //    End If
-            //End Sub
+                hasLoaded = false;
+                pbExecutionStatus.Value = 0;
+                lblPercentage.Text = "0%";
+            }
             return true;
         }
         #endregion

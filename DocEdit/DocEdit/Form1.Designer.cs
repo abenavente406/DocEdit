@@ -35,12 +35,17 @@
             this.stslblFileLoaded = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblPercentage = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkDelSlideNums = new System.Windows.Forms.CheckBox();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkScaleSlides = new System.Windows.Forms.CheckBox();
+            this.chkDelSlideNums = new System.Windows.Forms.CheckBox();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.btnSaveFile = new System.Windows.Forms.Button();
             this.btnPreview = new System.Windows.Forms.Button();
@@ -48,11 +53,8 @@
             this.lblLoadedFile = new System.Windows.Forms.Label();
             this.btnExecute = new System.Windows.Forms.Button();
             this.btnUnload = new System.Windows.Forms.Button();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.previewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pdfReader)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -61,6 +63,9 @@
             // 
             // pdfReader
             // 
+            this.pdfReader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pdfReader.Enabled = true;
             this.pdfReader.Location = new System.Drawing.Point(380, 36);
             this.pdfReader.Name = "pdfReader";
@@ -70,6 +75,7 @@
             // 
             // pbExecutionStatus
             // 
+            this.pbExecutionStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbExecutionStatus.Location = new System.Drawing.Point(12, 379);
             this.pbExecutionStatus.Name = "pbExecutionStatus";
             this.pbExecutionStatus.Size = new System.Drawing.Size(346, 23);
@@ -93,6 +99,7 @@
             // 
             // lblPercentage
             // 
+            this.lblPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPercentage.AutoSize = true;
             this.lblPercentage.Location = new System.Drawing.Point(167, 409);
             this.lblPercentage.Name = "lblPercentage";
@@ -112,6 +119,67 @@
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Text = "Open...";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.btnLoadFile_Click);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.btnSaveFile_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.previewToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "&View";
+            // 
+            // previewToolStripMenuItem
+            // 
+            this.previewToolStripMenuItem.Name = "previewToolStripMenuItem";
+            this.previewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.previewToolStripMenuItem.Text = "Preview";
+            this.previewToolStripMenuItem.Click += new System.EventHandler(this.btnPreview_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About...";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.chkScaleSlides);
@@ -123,31 +191,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Check the tasks you want enabled:";
             // 
-            // fileToolStripMenuItem
+            // chkScaleSlides
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // viewToolStripMenuItem
-            // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.previewToolStripMenuItem});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "&View";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "&Help";
+            this.chkScaleSlides.AutoSize = true;
+            this.chkScaleSlides.Location = new System.Drawing.Point(11, 55);
+            this.chkScaleSlides.Name = "chkScaleSlides";
+            this.chkScaleSlides.Size = new System.Drawing.Size(153, 17);
+            this.chkScaleSlides.TabIndex = 0;
+            this.chkScaleSlides.Text = "Change Slide Size to 100%";
+            this.chkScaleSlides.UseVisualStyleBackColor = true;
             // 
             // chkDelSlideNums
             // 
@@ -159,16 +211,6 @@
             this.chkDelSlideNums.Text = "Delete Slide Numbers";
             this.chkDelSlideNums.UseVisualStyleBackColor = true;
             // 
-            // chkScaleSlides
-            // 
-            this.chkScaleSlides.AutoSize = true;
-            this.chkScaleSlides.Location = new System.Drawing.Point(11, 55);
-            this.chkScaleSlides.Name = "chkScaleSlides";
-            this.chkScaleSlides.Size = new System.Drawing.Size(153, 17);
-            this.chkScaleSlides.TabIndex = 0;
-            this.chkScaleSlides.Text = "Change Slide Size to 100%";
-            this.chkScaleSlides.UseVisualStyleBackColor = true;
-            // 
             // btnLoadFile
             // 
             this.btnLoadFile.Location = new System.Drawing.Point(12, 143);
@@ -177,6 +219,7 @@
             this.btnLoadFile.TabIndex = 6;
             this.btnLoadFile.Text = "Load File";
             this.btnLoadFile.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
             // btnSaveFile
             // 
@@ -186,18 +229,22 @@
             this.btnSaveFile.TabIndex = 6;
             this.btnSaveFile.Text = "Save File";
             this.btnSaveFile.UseVisualStyleBackColor = true;
+            this.btnSaveFile.Click += new System.EventHandler(this.btnSaveFile_Click);
             // 
             // btnPreview
             // 
+            this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnPreview.Location = new System.Drawing.Point(12, 304);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(97, 23);
             this.btnPreview.TabIndex = 6;
             this.btnPreview.Text = "Preview";
             this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // lblPagesInDoc
             // 
+            this.lblPagesInDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPagesInDoc.AutoSize = true;
             this.lblPagesInDoc.Location = new System.Drawing.Point(11, 336);
             this.lblPagesInDoc.Name = "lblPagesInDoc";
@@ -207,6 +254,7 @@
             // 
             // lblLoadedFile
             // 
+            this.lblLoadedFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLoadedFile.AutoSize = true;
             this.lblLoadedFile.Location = new System.Drawing.Point(11, 357);
             this.lblLoadedFile.Name = "lblLoadedFile";
@@ -216,6 +264,7 @@
             // 
             // btnExecute
             // 
+            this.btnExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnExecute.Location = new System.Drawing.Point(11, 429);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(97, 23);
@@ -226,42 +275,24 @@
             // 
             // btnUnload
             // 
+            this.btnUnload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnUnload.Location = new System.Drawing.Point(261, 429);
             this.btnUnload.Name = "btnUnload";
             this.btnUnload.Size = new System.Drawing.Size(97, 23);
             this.btnUnload.TabIndex = 6;
             this.btnUnload.Text = "Unload File";
             this.btnUnload.UseVisualStyleBackColor = true;
+            this.btnUnload.Click += new System.EventHandler(this.btnUnload_Click);
             // 
-            // openToolStripMenuItem
+            // openFileDialog
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.openToolStripMenuItem.Text = "Open...";
+            this.openFileDialog.FileName = "openFileDialog1";
+            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
-            // saveAsToolStripMenuItem
+            // saveFileDialog
             // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveAsToolStripMenuItem.Text = "Save As...";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // previewToolStripMenuItem
-            // 
-            this.previewToolStripMenuItem.Name = "previewToolStripMenuItem";
-            this.previewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.previewToolStripMenuItem.Text = "Preview";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About...";
+            this.saveFileDialog.Filter = "\"PDF|*.pdf|Word Document|*.doc\"";
+            this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
             // 
             // Form1
             // 
@@ -284,6 +315,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pdfReader)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -322,6 +354,8 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem previewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
