@@ -272,6 +272,8 @@ namespace DocEdit
                     loadedDoc.Close(false);
                     tmpDoc.Close(false);
                     System.IO.File.Delete(tmpFilePath + "\\preview.pdf");
+                    System.IO.File.Delete(tmpFilePath + "\\temp.pdf");
+                    System.IO.File.Delete(tmpFilePath + "\\temp.docx");
                 }
                 catch (Exception ex)
                 {
