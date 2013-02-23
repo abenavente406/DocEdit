@@ -63,12 +63,13 @@ namespace DocEdit
                     Screen.GetWorkingArea(this.Bounds).Height);
                 this.Location = new Point(0, 0);
 
+                SaveTempPDF();
                 lblLoadedFile.Text = "Loaded Doc: " + loadedDoc.Path + "\\" + loadedDoc.Name;
                 stslblFileLoaded.Text = "File Loaded: True";
                 pgNums = loadedDoc.ComputeStatistics(Microsoft.Office.Interop.Word.WdStatistic.wdStatisticPages);
                 lblPagesInDoc.Text = "Pages in Document: " + pgNums.ToString();
 
-                SaveTempPDF();
+                pdfReader.Refresh();
             }
             catch (System.Runtime.InteropServices.COMException ex)
             {

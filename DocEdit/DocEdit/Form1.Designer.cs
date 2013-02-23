@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.pdfReader = new AxAcroPDFLib.AxAcroPDF();
             this.pbExecutionStatus = new System.Windows.Forms.ProgressBar();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.stslblFileLoaded = new System.Windows.Forms.ToolStripStatusLabel();
@@ -55,23 +54,12 @@
             this.btnUnload = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.pdfReader)).BeginInit();
+            this.pdfReader = new AxAcroPDFLib.AxAcroPDF();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pdfReader)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pdfReader
-            // 
-            this.pdfReader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pdfReader.Enabled = true;
-            this.pdfReader.Location = new System.Drawing.Point(380, 36);
-            this.pdfReader.Name = "pdfReader";
-            this.pdfReader.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("pdfReader.OcxState")));
-            this.pdfReader.Size = new System.Drawing.Size(337, 416);
-            this.pdfReader.TabIndex = 0;
             // 
             // pbExecutionStatus
             // 
@@ -294,11 +282,24 @@
             this.saveFileDialog.Filter = "\"PDF|*.pdf|Word Document|*.doc\"";
             this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
             // 
+            // pdfReader
+            // 
+            this.pdfReader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pdfReader.Enabled = true;
+            this.pdfReader.Location = new System.Drawing.Point(364, 36);
+            this.pdfReader.Name = "pdfReader";
+            this.pdfReader.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("pdfReader.OcxState")));
+            this.pdfReader.Size = new System.Drawing.Size(353, 416);
+            this.pdfReader.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 489);
+            this.Controls.Add(this.pdfReader);
             this.Controls.Add(this.lblLoadedFile);
             this.Controls.Add(this.lblPagesInDoc);
             this.Controls.Add(this.btnUnload);
@@ -311,18 +312,17 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pbExecutionStatus);
-            this.Controls.Add(this.pdfReader);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.pdfReader)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pdfReader)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -330,7 +330,6 @@
 
         #endregion
 
-        private AxAcroPDFLib.AxAcroPDF pdfReader;
         private System.Windows.Forms.ProgressBar pbExecutionStatus;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel stslblFileLoaded;
@@ -356,6 +355,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private AxAcroPDFLib.AxAcroPDF pdfReader;
     }
 }
 
