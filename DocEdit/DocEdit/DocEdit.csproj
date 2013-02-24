@@ -147,6 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ICON.ico" />
+    <None Include="Resources\logoPictureBox.Image1.bmp" />
+    <None Include="Resources\logoPictureBox.Image.png" />
+    <None Include="Resources\logoPictureBox.Image.bmp" />
     <None Include="ICON.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

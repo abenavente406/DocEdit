@@ -29,7 +29,7 @@ namespace DocEdit
         protected override void OnCreateMainForm()
         {
             System.Threading.Thread.Sleep(1750);  // Test
-            this.MainForm = new Form1();
+            this.MainForm = new frmMain();
         }
     }
 }

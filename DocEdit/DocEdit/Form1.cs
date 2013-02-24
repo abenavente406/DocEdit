@@ -8,11 +8,11 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
-using Microsoft.Office.Interop;
+using Microsoft.Office;
 
 namespace DocEdit
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
         #region Fields
         // The word application to handle MSWord operations
@@ -20,10 +20,8 @@ namespace DocEdit
             new Microsoft.Office.Interop.Word.Application();
 
         // Create the documents to be manipulated
-        Microsoft.Office.Interop.Word.Document loadedDoc =
-            new Microsoft.Office.Interop.Word.Document();
-        Microsoft.Office.Interop.Word.Document tmpDoc =
-            new Microsoft.Office.Interop.Word.Document();
+        Microsoft.Office.Interop.Word.Document loadedDoc;
+        Microsoft.Office.Interop.Word.Document tmpDoc;
 
         private int   pgNums   = 0;
         private bool hasLoaded = false;
@@ -31,9 +29,12 @@ namespace DocEdit
         #endregion
 
         #region Controls
-        public Form1()
+        public frmMain()
         {
             InitializeComponent();
+            this.Size = new Size(381, 481);
+            loadedDoc = new Microsoft.Office.Interop.Word.Document();
+            tmpDoc = new Microsoft.Office.Interop.Word.Document();
         }
 
         private void btnLoadFile_Click(object sender, EventArgs e)
@@ -63,12 +64,14 @@ namespace DocEdit
                     Screen.GetWorkingArea(this.Bounds).Height);
                 this.Location = new Point(0, 0);
 
-                SaveTempPDF();
                 lblLoadedFile.Text = "Loaded Doc: " + loadedDoc.Path + "\\" + loadedDoc.Name;
                 stslblFileLoaded.Text = "File Loaded: True";
                 pgNums = loadedDoc.ComputeStatistics(Microsoft.Office.Interop.Word.WdStatistic.wdStatisticPages);
                 lblPagesInDoc.Text = "Pages in Document: " + pgNums.ToString();
 
+                pdfReader.Visible = true;
+
+                SaveTempPDF();
                 pdfReader.Refresh();
             }
             catch (System.Runtime.InteropServices.COMException ex)
@@ -178,13 +181,12 @@ namespace DocEdit
             // Find and delete the numbers + 
             for (int i = 1; i <= pgNums; i++)
             {
-                tmpDoc.Content.Find.Execute(FindText:"Slide " + i.ToString() + "\n\n", ReplaceWith: "",
+                tmpDoc.Content.Find.Execute(FindText:"Slide " + i.ToString() + "\r\r", ReplaceWith: "",
                     Replace: Microsoft.Office.Interop.Word.WdReplace.wdReplaceAll,
                     Wrap: Microsoft.Office.Interop.Word.WdFindWrap.wdFindContinue);
 
                 pbExecutionStatus.Value = (i / pgNums) * 50;
                 lblPercentage.Text = pbExecutionStatus.Value.ToString() + "%";
-
             }
         }
 
@@ -222,14 +224,14 @@ namespace DocEdit
 
         private void SaveTempPDF()
         {
-            string tmpFilePath = System.IO.Directory.GetCurrentDirectory() + "\\preview.pdf";
-            tmpDoc.SaveAs2(FileName:tmpFilePath, FileFormat:Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF);
-            UpdatePDFReader(tmpFilePath);
+            string tmpFilePathLocal = tmpFilePath + "\\preview.pdf";
+            tmpDoc.SaveAs2(FileName:tmpFilePathLocal, FileFormat:Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF);
+            UpdatePDFReader(tmpFilePathLocal);
         }
 
         private void UpdatePDFReader(string tempFilePath)
         {
-            pdfReader.LoadFile(tmpFilePath);
+            pdfReader.LoadFile(tempFilePath);
             pdfReader.Refresh();
         }
 

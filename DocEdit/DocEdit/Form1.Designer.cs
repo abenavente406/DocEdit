@@ -1,6 +1,6 @@
 ﻿namespace DocEdit
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.pbExecutionStatus = new System.Windows.Forms.ProgressBar();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.stslblFileLoaded = new System.Windows.Forms.ToolStripStatusLabel();
@@ -64,7 +64,7 @@
             // pbExecutionStatus
             // 
             this.pbExecutionStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbExecutionStatus.Location = new System.Drawing.Point(12, 379);
+            this.pbExecutionStatus.Location = new System.Drawing.Point(12, 337);
             this.pbExecutionStatus.Name = "pbExecutionStatus";
             this.pbExecutionStatus.Size = new System.Drawing.Size(346, 23);
             this.pbExecutionStatus.TabIndex = 1;
@@ -73,23 +73,23 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stslblFileLoaded});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 467);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 425);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(729, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(683, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // stslblFileLoaded
             // 
             this.stslblFileLoaded.Name = "stslblFileLoaded";
-            this.stslblFileLoaded.Size = new System.Drawing.Size(73, 17);
-            this.stslblFileLoaded.Text = "File Loaded: ";
+            this.stslblFileLoaded.Size = new System.Drawing.Size(99, 17);
+            this.stslblFileLoaded.Text = "File Loaded: False";
             // 
             // lblPercentage
             // 
             this.lblPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPercentage.AutoSize = true;
-            this.lblPercentage.Location = new System.Drawing.Point(167, 409);
+            this.lblPercentage.Location = new System.Drawing.Point(167, 367);
             this.lblPercentage.Name = "lblPercentage";
             this.lblPercentage.Size = new System.Drawing.Size(21, 13);
             this.lblPercentage.TabIndex = 3;
@@ -103,7 +103,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(729, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(683, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -182,6 +182,8 @@
             // chkScaleSlides
             // 
             this.chkScaleSlides.AutoSize = true;
+            this.chkScaleSlides.Checked = true;
+            this.chkScaleSlides.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkScaleSlides.Location = new System.Drawing.Point(11, 55);
             this.chkScaleSlides.Name = "chkScaleSlides";
             this.chkScaleSlides.Size = new System.Drawing.Size(153, 17);
@@ -192,6 +194,8 @@
             // chkDelSlideNums
             // 
             this.chkDelSlideNums.AutoSize = true;
+            this.chkDelSlideNums.Checked = true;
+            this.chkDelSlideNums.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkDelSlideNums.Location = new System.Drawing.Point(11, 24);
             this.chkDelSlideNums.Name = "chkDelSlideNums";
             this.chkDelSlideNums.Size = new System.Drawing.Size(128, 17);
@@ -222,7 +226,7 @@
             // btnPreview
             // 
             this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPreview.Location = new System.Drawing.Point(12, 304);
+            this.btnPreview.Location = new System.Drawing.Point(12, 262);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(97, 23);
             this.btnPreview.TabIndex = 6;
@@ -234,7 +238,7 @@
             // 
             this.lblPagesInDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPagesInDoc.AutoSize = true;
-            this.lblPagesInDoc.Location = new System.Drawing.Point(11, 336);
+            this.lblPagesInDoc.Location = new System.Drawing.Point(11, 294);
             this.lblPagesInDoc.Name = "lblPagesInDoc";
             this.lblPagesInDoc.Size = new System.Drawing.Size(110, 13);
             this.lblPagesInDoc.TabIndex = 7;
@@ -244,7 +248,7 @@
             // 
             this.lblLoadedFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLoadedFile.AutoSize = true;
-            this.lblLoadedFile.Location = new System.Drawing.Point(11, 357);
+            this.lblLoadedFile.Location = new System.Drawing.Point(11, 315);
             this.lblLoadedFile.Name = "lblLoadedFile";
             this.lblLoadedFile.Size = new System.Drawing.Size(98, 13);
             this.lblLoadedFile.TabIndex = 7;
@@ -253,7 +257,7 @@
             // btnExecute
             // 
             this.btnExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExecute.Location = new System.Drawing.Point(11, 429);
+            this.btnExecute.Location = new System.Drawing.Point(11, 387);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(97, 23);
             this.btnExecute.TabIndex = 6;
@@ -264,7 +268,7 @@
             // btnUnload
             // 
             this.btnUnload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUnload.Location = new System.Drawing.Point(261, 429);
+            this.btnUnload.Location = new System.Drawing.Point(261, 387);
             this.btnUnload.Name = "btnUnload";
             this.btnUnload.Size = new System.Drawing.Size(97, 23);
             this.btnUnload.TabIndex = 6;
@@ -291,14 +295,15 @@
             this.pdfReader.Location = new System.Drawing.Point(364, 36);
             this.pdfReader.Name = "pdfReader";
             this.pdfReader.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("pdfReader.OcxState")));
-            this.pdfReader.Size = new System.Drawing.Size(353, 416);
+            this.pdfReader.Size = new System.Drawing.Size(307, 374);
             this.pdfReader.TabIndex = 8;
+            this.pdfReader.Visible = false;
             // 
-            // Form1
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(729, 489);
+            this.ClientSize = new System.Drawing.Size(683, 447);
             this.Controls.Add(this.pdfReader);
             this.Controls.Add(this.lblLoadedFile);
             this.Controls.Add(this.lblPagesInDoc);
@@ -312,9 +317,13 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pbExecutionStatus);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Doc Edit";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

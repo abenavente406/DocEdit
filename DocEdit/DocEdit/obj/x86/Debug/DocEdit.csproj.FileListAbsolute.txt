@@ -19,8 +19,8 @@ C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\bin\Debug\Doc Edit.exe
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\bin\Debug\Doc Edit.pdb
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\bin\Debug\Interop.AcroPDFLib.dll
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\bin\Debug\AxInterop.AcroPDFLib.dll
-C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.Form1.resources
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.Properties.Resources.resources
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.csproj.GenerateResource.Cache
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.AboutBox1.resources
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.SplashScreen.resources
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.frmMain.resources
