@@ -12,8 +12,32 @@ using Microsoft.Office;
 
 namespace DocEdit
 {
+    public enum Theme
+    {
+        LIGHT, DARK
+    }
+
     public partial class frmMain : Form
     {
+        #region Theme Variables
+        Theme theme = Theme.DARK;
+
+        Color formBackColor = Color.FromArgb(242, 242, 249);
+        Color menuStripsColor = Color.FromArgb(246, 251, 243);
+        Color toolStripsForeColor = Color.Black;
+        Color buttonsNoHoverColor = Color.FromArgb(189, 178, 183);
+        Color buttonsHoverColor = ColorTranslator.FromHtml("#757072");
+        Color buttonsHoverUnloadColor = ColorTranslator.FromHtml("#F01D1D");
+        Color pBarBackColor = Color.Gainsboro;
+        Color pBarForeColor = Color.FromArgb(255, 128, 0);
+        Color textColor = Color.Black;
+
+        Image imgXButton;
+        Image imgXButtonHover;
+        Image imgMinButton;
+        Image imgMinButtonHover;
+        #endregion
+
         #region Fields
         // The word application to handle MSWord operations
         Microsoft.Office.Interop.Word.Application wordApp = 
@@ -26,17 +50,21 @@ namespace DocEdit
         private int   pgNums   = 0;
         private bool hasLoaded = false;
         private string tmpFilePath = System.IO.Directory.GetCurrentDirectory();
+
+        // Pont of reference when dragging the form
+        Point dragOffset;
         #endregion
 
-        #region Controls
         public frmMain()
         {
             InitializeComponent();
             this.Size = new Size(371, 481);
             loadedDoc = new Microsoft.Office.Interop.Word.Document();
             tmpDoc = new Microsoft.Office.Interop.Word.Document();
+            RefreshTheme();
         }
 
+        #region Controls
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
             openFileDialog.ShowDialog();
@@ -84,7 +112,6 @@ namespace DocEdit
                 PrintErrorMessage("ERROR! Could not open the file.", ex);
             }
         }
-
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
             if (hasLoaded)
@@ -157,6 +184,103 @@ namespace DocEdit
         {
             Application.Exit();
         }
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutBox1().ShowDialog();
+        }
+        private void lightThemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!(theme == Theme.LIGHT))
+            {
+                theme = Theme.LIGHT;
+                RefreshTheme();
+            }
+            else
+            {
+                PrintErrorMessage("This theme is already selected.");
+            }
+        }
+        private void darkThemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!(theme == Theme.DARK))
+            {
+                theme = Theme.DARK;
+                RefreshTheme();
+            }
+            else
+            {
+                PrintErrorMessage("This theme is already selected.");
+            }
+        }
+
+        // The x button control box and minimize control box
+        private void closeFormButtton_MouseEnter(object sender, EventArgs e)
+        {
+            closeFormButtton.Image = imgXButtonHover;
+        }
+        private void closeFormButtton_MouseLeave(object sender, EventArgs e)
+        {
+            closeFormButtton.Image = imgXButton;
+        }
+        private void closeFormButtton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void minimizeBox_MouseEnter(object sender, EventArgs e)
+        {
+            minimizeBox.Image = imgMinButtonHover;
+        }
+        private void minimizeBox_MouseLeave(object sender, EventArgs e)
+        {
+            minimizeBox.Image = imgMinButton;
+        }
+        private void minimizeBox_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        // Dragging the form during run time
+        private void menuStrip1_MouseDown(object sender, MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if (e.Button == MouseButtons.Left)
+            {
+                dragOffset = this.PointToScreen(e.Location);
+                var formLocation = FindForm().Location;
+                dragOffset.X -= formLocation.X;
+                dragOffset.Y -= formLocation.Y;
+            }
+        }
+        private void menuStrip1_MouseMove(object sender, MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            if (e.Button == MouseButtons.Left)
+            {
+                Point newLocation = this.PointToScreen(e.Location);
+
+                newLocation.X -= dragOffset.X;
+                newLocation.Y -= dragOffset.Y;
+
+                FindForm().Location = newLocation;
+            }
+        }
+        // Changing button colors when the mouse enters
+        private void btn_MouseEnter(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+            if (!(sender.Equals(btnUnload)))
+                control.BackColor = buttonsHoverColor;
+            else
+                control.BackColor = buttonsHoverUnloadColor;
+        }
+        private void btn_MouseLeave(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+            control.BackColor = buttonsNoHoverColor;
+        }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (hasLoaded)
@@ -179,11 +303,6 @@ namespace DocEdit
             {
                 PrintErrorMessage("ERROR! Could not exit a winword task.", ex);
             }
-        }
-        
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new AboutBox1().ShowDialog();
         }
         #endregion
 
@@ -220,7 +339,6 @@ namespace DocEdit
         #endregion
 
         #region Helper Functions
-
         private void PrintErrorMessage(string message, Exception ex)
         {
             MessageBox.Show(this, message + "\n\n" + ex.Message, "ERROR", 
@@ -302,78 +420,85 @@ namespace DocEdit
         #endregion
 
         #region Customized GUI
-
-        Point dragOffset;
-
-        // The x button control box and minimize control box
-        private void closeFormButtton_MouseEnter(object sender, EventArgs e)
+        private void RefreshTheme()
         {
-            closeFormButtton.Image = DocEdit.Properties.Resources.X_Hover;
-        }
-        private void closeFormButtton_MouseLeave(object sender, EventArgs e)
-        {
-            closeFormButtton.Image = DocEdit.Properties.Resources.X;
-        }
-        private void closeFormButtton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void minimizeBox_MouseEnter(object sender, EventArgs e)
-        {
-            minimizeBox.Image = DocEdit.Properties.Resources.Minimize_Hover;
-        }
-
-        private void minimizeBox_MouseLeave(object sender, EventArgs e)
-        {
-            minimizeBox.Image = DocEdit.Properties.Resources.Minimize;
-        }
-        private void minimizeBox_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        // Dragging the form during run time
-        private void menuStrip1_MouseDown(object sender, MouseEventArgs e)
-        {
-            base.OnMouseDown(e);
-            if (e.Button == MouseButtons.Left)
+            switch (theme)
             {
-                dragOffset = this.PointToScreen(e.Location);
-                var formLocation = FindForm().Location;
-                dragOffset.X -= formLocation.X;
-                dragOffset.Y -= formLocation.Y;
-            }
-        }
-        private void menuStrip1_MouseMove(object sender, MouseEventArgs e)
-        {
-            base.OnMouseMove(e);
+                case (Theme.DARK):
+                    formBackColor = Color.FromArgb(63, 63, 63);
+                    buttonsHoverColor = Color.FromArgb(140, 209, 255);
+                    buttonsNoHoverColor = Color.FromArgb(77, 184, 255);
+                    buttonsHoverUnloadColor = Color.FromArgb(240, 29, 29);
+                    menuStripsColor = Color.FromArgb(4, 4, 4);
+                    toolStripsForeColor = Color.White;
+                    pBarBackColor = Color.DarkGray;
+                    pBarForeColor = Color.FromArgb(177, 255, 125);
+                    textColor = Color.White;
 
-            if (e.Button == MouseButtons.Left)
+                    imgXButton = DocEdit.Properties.Resources.X;
+                    imgXButtonHover = DocEdit.Properties.Resources.X_Hover;
+                    imgMinButton = DocEdit.Properties.Resources.Minimize;
+                    imgMinButtonHover = DocEdit.Properties.Resources.Minimize_Hover;
+
+                    break;
+
+                case (Theme.LIGHT):
+                    formBackColor = Color.FromArgb(242, 242, 249);
+                    menuStripsColor = Color.FromArgb(246, 251, 243);
+                    toolStripsForeColor = Color.Black;
+                    buttonsNoHoverColor = Color.FromArgb(189, 178, 183);
+                    buttonsHoverColor = ColorTranslator.FromHtml("#757072");
+                    buttonsHoverUnloadColor = ColorTranslator.FromHtml("#F01D1D");
+                    pBarBackColor = Color.Gainsboro;
+                    pBarForeColor = Color.FromArgb(255, 128, 0);
+                    textColor = Color.Black;
+
+                    imgXButton = DocEdit.Properties.Resources.XLight;
+                    imgXButtonHover = DocEdit.Properties.Resources.X_HoverLight;
+                    imgMinButton = DocEdit.Properties.Resources.MinimizeLight;
+                    imgMinButtonHover = DocEdit.Properties.Resources.Minimize_HoverLight;
+
+                    break;
+            }
+
+            this.BackColor = formBackColor;
+
+            foreach (Control c in this.Controls)
             {
-                Point newLocation = this.PointToScreen(e.Location);
-
-                newLocation.X -= dragOffset.X;
-                newLocation.Y -= dragOffset.Y;
-
-                FindForm().Location = newLocation;
+                if (c is Button)
+                {
+                    c.BackColor = buttonsNoHoverColor;
+                    c.ForeColor = Color.Black;
+                }
+                else if (c is MenuStrip)
+                {
+                    foreach (ToolStripMenuItem t in menuStrip1.Items)
+                    {
+                        foreach (ToolStripMenuItem i in t.DropDownItems)
+                        {
+                            t.BackColor = menuStripsColor;
+                            t.ForeColor = toolStripsForeColor;
+                            i.BackColor = menuStripsColor;
+                            i.ForeColor = toolStripsForeColor;
+                        }
+                    }
+                    c.BackColor = menuStripsColor;
+                }
+                c.ForeColor = textColor;
             }
+
+            foreach (CheckBox c in groupBox1.Controls)
+            {
+                c.ForeColor = textColor;
+            }
+
+            pBar1.BackColor = pBarBackColor;
+            pBar1.ForeColor = pBarForeColor;
+            statusStrip1.BackColor = menuStripsColor;
+            statusStrip1.ForeColor = textColor;
+            closeFormButtton.Image = imgXButton;
+            minimizeBox.Image = imgMinButton;
         }
         #endregion
-
-        private void btn_MouseEnter(object sender, EventArgs e)
-        {
-            Control control = sender as Control;
-            if (!(sender.Equals(btnUnload)))
-                control.BackColor = ColorTranslator.FromHtml("#8CD1FF");
-            else
-                control.BackColor = ColorTranslator.FromHtml("#F01D1D");
-        }
-
-        private void btn_MouseLeave(object sender, EventArgs e)
-        {
-            Control control = sender as Control;
-            control.BackColor = ColorTranslator.FromHtml("#4DB8FF");
-        }
-
     }
 }

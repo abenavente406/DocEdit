@@ -150,6 +150,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ICON.ico" />
+    <None Include="Resources\XLight.png" />
+    <None Include="Resources\X-HoverLight.png" />
+    <None Include="Resources\MinimizeLight.png" />
+    <None Include="Resources\Minimize-HoverLight.png" />
     <None Include="Resources\X-Hover.png" />
     <None Include="Resources\Minimize-Hover.png" />
     <None Include="Resources\Minimize.png" />
