@@ -20,7 +20,7 @@ namespace DocEdit
     public partial class frmMain : Form
     {
         #region Theme Variables
-        Theme theme = Theme.DARK;
+        Theme theme = Theme.LIGHT;
 
         Color formBackColor = Color.FromArgb(242, 242, 249);
         Color menuStripsColor = Color.FromArgb(246, 251, 243);
