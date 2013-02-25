@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.pbExecutionStatus = new System.Windows.Forms.ProgressBar();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.stslblFileLoaded = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblPercentage = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,22 +54,21 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.pdfReader = new AxAcroPDFLib.AxAcroPDF();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.minimizeBox = new System.Windows.Forms.PictureBox();
+            this.closeFormButtton = new System.Windows.Forms.PictureBox();
+            this.pBar1 = new PBar.PBar();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pdfReader)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minimizeBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.closeFormButtton)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbExecutionStatus
-            // 
-            this.pbExecutionStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbExecutionStatus.Location = new System.Drawing.Point(12, 337);
-            this.pbExecutionStatus.Name = "pbExecutionStatus";
-            this.pbExecutionStatus.Size = new System.Drawing.Size(346, 23);
-            this.pbExecutionStatus.TabIndex = 1;
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(4)))), ((int)(((byte)(4)))));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stslblFileLoaded});
             this.statusStrip1.Location = new System.Drawing.Point(0, 425);
@@ -81,22 +79,15 @@
             // 
             // stslblFileLoaded
             // 
+            this.stslblFileLoaded.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stslblFileLoaded.ForeColor = System.Drawing.Color.White;
             this.stslblFileLoaded.Name = "stslblFileLoaded";
-            this.stslblFileLoaded.Size = new System.Drawing.Size(99, 17);
+            this.stslblFileLoaded.Size = new System.Drawing.Size(104, 17);
             this.stslblFileLoaded.Text = "File Loaded: False";
-            // 
-            // lblPercentage
-            // 
-            this.lblPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblPercentage.AutoSize = true;
-            this.lblPercentage.Location = new System.Drawing.Point(167, 367);
-            this.lblPercentage.Name = "lblPercentage";
-            this.lblPercentage.Size = new System.Drawing.Size(21, 13);
-            this.lblPercentage.TabIndex = 3;
-            this.lblPercentage.Text = "0%";
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(4)))), ((int)(((byte)(4)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.viewToolStripMenuItem,
@@ -106,65 +97,97 @@
             this.menuStrip1.Size = new System.Drawing.Size(683, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseDown);
+            this.menuStrip1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseMove);
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(30, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // openToolStripMenuItem
             // 
+            this.openToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.openToolStripMenuItem.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
             // saveAsToolStripMenuItem
             // 
+            this.saveAsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.saveAsToolStripMenuItem.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.btnSaveFile_Click);
             // 
             // exitToolStripMenuItem
             // 
+            this.exitToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.exitToolStripMenuItem.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
+            this.viewToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.previewToolStripMenuItem});
+            this.viewToolStripMenuItem.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.viewToolStripMenuItem.Text = "&View";
             // 
             // previewToolStripMenuItem
             // 
+            this.previewToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.previewToolStripMenuItem.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.previewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.previewToolStripMenuItem.Name = "previewToolStripMenuItem";
-            this.previewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.previewToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.previewToolStripMenuItem.Size = new System.Drawing.Size(120, 20);
             this.previewToolStripMenuItem.Text = "Preview";
             this.previewToolStripMenuItem.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
             // 
+            this.aboutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -172,9 +195,11 @@
             // 
             this.groupBox1.Controls.Add(this.chkScaleSlides);
             this.groupBox1.Controls.Add(this.chkDelSlideNums);
+            this.groupBox1.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(12, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(346, 87);
+            this.groupBox1.Size = new System.Drawing.Size(346, 90);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Check the tasks you want enabled:";
@@ -184,9 +209,11 @@
             this.chkScaleSlides.AutoSize = true;
             this.chkScaleSlides.Checked = true;
             this.chkScaleSlides.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkScaleSlides.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkScaleSlides.ForeColor = System.Drawing.Color.White;
             this.chkScaleSlides.Location = new System.Drawing.Point(11, 55);
             this.chkScaleSlides.Name = "chkScaleSlides";
-            this.chkScaleSlides.Size = new System.Drawing.Size(153, 17);
+            this.chkScaleSlides.Size = new System.Drawing.Size(171, 19);
             this.chkScaleSlides.TabIndex = 0;
             this.chkScaleSlides.Text = "Change Slide Size to 100%";
             this.chkScaleSlides.UseVisualStyleBackColor = true;
@@ -196,51 +223,69 @@
             this.chkDelSlideNums.AutoSize = true;
             this.chkDelSlideNums.Checked = true;
             this.chkDelSlideNums.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDelSlideNums.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDelSlideNums.ForeColor = System.Drawing.Color.White;
             this.chkDelSlideNums.Location = new System.Drawing.Point(11, 24);
             this.chkDelSlideNums.Name = "chkDelSlideNums";
-            this.chkDelSlideNums.Size = new System.Drawing.Size(128, 17);
+            this.chkDelSlideNums.Size = new System.Drawing.Size(147, 19);
             this.chkDelSlideNums.TabIndex = 0;
             this.chkDelSlideNums.Text = "Delete Slide Numbers";
             this.chkDelSlideNums.UseVisualStyleBackColor = true;
             // 
             // btnLoadFile
             // 
+            this.btnLoadFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(184)))), ((int)(((byte)(255)))));
+            this.btnLoadFile.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLoadFile.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLoadFile.Location = new System.Drawing.Point(12, 143);
             this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(97, 23);
+            this.btnLoadFile.Size = new System.Drawing.Size(113, 24);
             this.btnLoadFile.TabIndex = 6;
             this.btnLoadFile.Text = "Load File";
-            this.btnLoadFile.UseVisualStyleBackColor = true;
+            this.btnLoadFile.UseVisualStyleBackColor = false;
             this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            this.btnLoadFile.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.btnLoadFile.MouseLeave += new System.EventHandler(this.btn_MouseLeave);
             // 
             // btnSaveFile
             // 
-            this.btnSaveFile.Location = new System.Drawing.Point(12, 182);
+            this.btnSaveFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(184)))), ((int)(((byte)(255)))));
+            this.btnSaveFile.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSaveFile.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveFile.Location = new System.Drawing.Point(131, 143);
             this.btnSaveFile.Name = "btnSaveFile";
-            this.btnSaveFile.Size = new System.Drawing.Size(97, 23);
+            this.btnSaveFile.Size = new System.Drawing.Size(113, 24);
             this.btnSaveFile.TabIndex = 6;
             this.btnSaveFile.Text = "Save File";
-            this.btnSaveFile.UseVisualStyleBackColor = true;
+            this.btnSaveFile.UseVisualStyleBackColor = false;
             this.btnSaveFile.Click += new System.EventHandler(this.btnSaveFile_Click);
+            this.btnSaveFile.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.btnSaveFile.MouseLeave += new System.EventHandler(this.btn_MouseLeave);
             // 
             // btnPreview
             // 
-            this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPreview.Location = new System.Drawing.Point(12, 262);
+            this.btnPreview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(184)))), ((int)(((byte)(255)))));
+            this.btnPreview.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPreview.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPreview.Location = new System.Drawing.Point(11, 185);
             this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(97, 23);
+            this.btnPreview.Size = new System.Drawing.Size(113, 24);
             this.btnPreview.TabIndex = 6;
             this.btnPreview.Text = "Preview";
-            this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.UseVisualStyleBackColor = false;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
+            this.btnPreview.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.btnPreview.MouseLeave += new System.EventHandler(this.btn_MouseLeave);
             // 
             // lblPagesInDoc
             // 
             this.lblPagesInDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPagesInDoc.AutoSize = true;
-            this.lblPagesInDoc.Location = new System.Drawing.Point(11, 294);
+            this.lblPagesInDoc.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPagesInDoc.ForeColor = System.Drawing.Color.White;
+            this.lblPagesInDoc.Location = new System.Drawing.Point(8, 275);
             this.lblPagesInDoc.Name = "lblPagesInDoc";
-            this.lblPagesInDoc.Size = new System.Drawing.Size(110, 13);
+            this.lblPagesInDoc.Size = new System.Drawing.Size(127, 13);
             this.lblPagesInDoc.TabIndex = 7;
             this.lblPagesInDoc.Text = "Pages in document: 0";
             // 
@@ -248,33 +293,45 @@
             // 
             this.lblLoadedFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLoadedFile.AutoSize = true;
-            this.lblLoadedFile.Location = new System.Drawing.Point(11, 315);
+            this.lblLoadedFile.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoadedFile.ForeColor = System.Drawing.Color.White;
+            this.lblLoadedFile.Location = new System.Drawing.Point(8, 300);
             this.lblLoadedFile.Name = "lblLoadedFile";
-            this.lblLoadedFile.Size = new System.Drawing.Size(98, 13);
+            this.lblLoadedFile.Size = new System.Drawing.Size(103, 13);
             this.lblLoadedFile.TabIndex = 7;
             this.lblLoadedFile.Text = "Loaded Doc: None";
             // 
             // btnExecute
             // 
             this.btnExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExecute.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(184)))), ((int)(((byte)(255)))));
+            this.btnExecute.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnExecute.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExecute.Location = new System.Drawing.Point(11, 387);
             this.btnExecute.Name = "btnExecute";
-            this.btnExecute.Size = new System.Drawing.Size(97, 23);
+            this.btnExecute.Size = new System.Drawing.Size(113, 24);
             this.btnExecute.TabIndex = 6;
             this.btnExecute.Text = "Execute";
-            this.btnExecute.UseVisualStyleBackColor = true;
+            this.btnExecute.UseVisualStyleBackColor = false;
             this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
+            this.btnExecute.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.btnExecute.MouseLeave += new System.EventHandler(this.btn_MouseLeave);
             // 
             // btnUnload
             // 
-            this.btnUnload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUnload.Location = new System.Drawing.Point(261, 387);
+            this.btnUnload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(184)))), ((int)(((byte)(255)))));
+            this.btnUnload.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUnload.Font = new System.Drawing.Font("Frutiger Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUnload.Location = new System.Drawing.Point(12, 226);
             this.btnUnload.Name = "btnUnload";
-            this.btnUnload.Size = new System.Drawing.Size(97, 23);
+            this.btnUnload.Size = new System.Drawing.Size(113, 24);
             this.btnUnload.TabIndex = 6;
             this.btnUnload.Text = "Unload File";
-            this.btnUnload.UseVisualStyleBackColor = true;
+            this.toolTip1.SetToolTip(this.btnUnload, "Unstable Feature");
+            this.btnUnload.UseVisualStyleBackColor = false;
             this.btnUnload.Click += new System.EventHandler(this.btnUnload_Click);
+            this.btnUnload.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.btnUnload.MouseLeave += new System.EventHandler(this.btn_MouseLeave);
             // 
             // openFileDialog
             // 
@@ -292,18 +349,63 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pdfReader.Enabled = true;
-            this.pdfReader.Location = new System.Drawing.Point(364, 36);
+            this.pdfReader.Location = new System.Drawing.Point(401, 36);
             this.pdfReader.Name = "pdfReader";
             this.pdfReader.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("pdfReader.OcxState")));
-            this.pdfReader.Size = new System.Drawing.Size(307, 374);
+            this.pdfReader.Size = new System.Drawing.Size(270, 374);
             this.pdfReader.TabIndex = 8;
             this.pdfReader.Visible = false;
+            // 
+            // minimizeBox
+            // 
+            this.minimizeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.minimizeBox.Image = global::DocEdit.Properties.Resources.Minimize;
+            this.minimizeBox.Location = new System.Drawing.Point(635, 0);
+            this.minimizeBox.Name = "minimizeBox";
+            this.minimizeBox.Size = new System.Drawing.Size(24, 24);
+            this.minimizeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.minimizeBox.TabIndex = 9;
+            this.minimizeBox.TabStop = false;
+            this.minimizeBox.Click += new System.EventHandler(this.minimizeBox_Click);
+            this.minimizeBox.MouseEnter += new System.EventHandler(this.minimizeBox_MouseEnter);
+            this.minimizeBox.MouseLeave += new System.EventHandler(this.minimizeBox_MouseLeave);
+            // 
+            // closeFormButtton
+            // 
+            this.closeFormButtton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.closeFormButtton.Image = global::DocEdit.Properties.Resources.X1;
+            this.closeFormButtton.Location = new System.Drawing.Point(659, 0);
+            this.closeFormButtton.Name = "closeFormButtton";
+            this.closeFormButtton.Size = new System.Drawing.Size(24, 24);
+            this.closeFormButtton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.closeFormButtton.TabIndex = 9;
+            this.closeFormButtton.TabStop = false;
+            this.closeFormButtton.Click += new System.EventHandler(this.closeFormButtton_Click);
+            this.closeFormButtton.MouseEnter += new System.EventHandler(this.closeFormButtton_MouseEnter);
+            this.closeFormButtton.MouseLeave += new System.EventHandler(this.closeFormButtton_MouseLeave);
+            // 
+            // pBar1
+            // 
+            this.pBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pBar1.BackColor = System.Drawing.Color.DarkGray;
+            this.pBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(255)))), ((int)(((byte)(125)))));
+            this.pBar1.Location = new System.Drawing.Point(11, 340);
+            this.pBar1.Name = "pBar1";
+            this.pBar1.Size = new System.Drawing.Size(347, 27);
+            this.pBar1.TabIndex = 10;
+            this.pBar1.TextColor = System.Drawing.Color.Black;
+            this.pBar1.Value = 0F;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));
             this.ClientSize = new System.Drawing.Size(683, 447);
+            this.ControlBox = false;
+            this.Controls.Add(this.pBar1);
+            this.Controls.Add(this.minimizeBox);
+            this.Controls.Add(this.closeFormButtton);
             this.Controls.Add(this.pdfReader);
             this.Controls.Add(this.lblLoadedFile);
             this.Controls.Add(this.lblPagesInDoc);
@@ -313,17 +415,14 @@
             this.Controls.Add(this.btnSaveFile);
             this.Controls.Add(this.btnLoadFile);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.lblPercentage);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pbExecutionStatus);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Doc Edit";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -332,6 +431,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pdfReader)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minimizeBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.closeFormButtton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -339,10 +440,8 @@
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar pbExecutionStatus;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel stslblFileLoaded;
-        private System.Windows.Forms.Label lblPercentage;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
@@ -365,6 +464,10 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private AxAcroPDFLib.AxAcroPDF pdfReader;
+        private System.Windows.Forms.PictureBox closeFormButtton;
+        private System.Windows.Forms.PictureBox minimizeBox;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private PBar.PBar pBar1;
     }
 }
 

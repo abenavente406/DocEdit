@@ -6,9 +6,12 @@ C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\Interop.A
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\AxInterop.AcroPDFLib.dll
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\DocEdit.csproj.ResolveComReference.cache
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\DocEdit.AboutBox1.resources
-C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\DocEdit.Form1.resources
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\DocEdit.Properties.Resources.resources
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\DocEdit.SplashScreen.resources
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\DocEdit.csproj.GenerateResource.Cache
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\Doc Edit.exe
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\Doc Edit.pdb
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\DocEdit.frmMain.resources
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\bin\Release\PBar.dll
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\bin\Release\PBar.pdb
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Release\DocEdit.csprojResolveAssemblyReference.cache

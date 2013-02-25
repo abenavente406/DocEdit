@@ -32,7 +32,7 @@ namespace DocEdit
         public frmMain()
         {
             InitializeComponent();
-            this.Size = new Size(381, 481);
+            this.Size = new Size(371, 481);
             loadedDoc = new Microsoft.Office.Interop.Word.Document();
             tmpDoc = new Microsoft.Office.Interop.Word.Document();
         }
@@ -87,7 +87,10 @@ namespace DocEdit
 
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
-            saveFileDialog.ShowDialog();
+            if (hasLoaded)
+                saveFileDialog.ShowDialog();
+            else
+                PrintErrorMessage("No file has been loaded!");
         }
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
@@ -114,31 +117,40 @@ namespace DocEdit
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
-            if (chkDelSlideNums.Checked)
-                DeleteSlideNums();
+            if (hasLoaded)
+            {
+                if (chkDelSlideNums.Checked)
+                    DeleteSlideNums();
 
-            if (chkScaleSlides.Checked)
-                ScaleImage();
+                if (chkScaleSlides.Checked)
+                    ScaleImage();
 
-            SaveTempPDF();
-            MessageBox.Show(this, "Finished executing tasks.", "Finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            pbExecutionStatus.Value = 100;
-            lblPercentage.Text = "100%";
+                SaveTempPDF();
+                MessageBox.Show(this, "Finished executing tasks.", "Finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                pBar1.Value = 100;
+            }
+            else
+                PrintErrorMessage("No file is loaded!");
         }
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            PreviewPDF();
+            if (hasLoaded)
+                PreviewPDF();
+            else
+                PrintErrorMessage("No file has been loaded!");
         }
-        
+
         private void btnUnload_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(this, "WARNING! This feature is very unstable.  Will you still continue?",
-                "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (hasLoaded)
             {
-                Reset();
+                if (MessageBox.Show(this, "WARNING! This feature is very unstable.  Will you still continue?",
+                  "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    Reset();
             }
+            else
+                PrintErrorMessage("No file has been loaded!");
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -185,8 +197,7 @@ namespace DocEdit
                     Replace: Microsoft.Office.Interop.Word.WdReplace.wdReplaceAll,
                     Wrap: Microsoft.Office.Interop.Word.WdFindWrap.wdFindContinue);
 
-                pbExecutionStatus.Value = (i / pgNums) * 50;
-                lblPercentage.Text = pbExecutionStatus.Value.ToString() + "%";
+                pBar1.Value = (i / pgNums) * 50;
             }
         }
 
@@ -201,8 +212,7 @@ namespace DocEdit
                 pict.ScaleHeight = 100;
 
                 tmpStatusVal = (counter / pgNums) * 50;
-                pbExecutionStatus.Value = tmpStatusVal + 50;
-                lblPercentage.Text = pbExecutionStatus.Value.ToString() + "%";
+                pBar1.Value = tmpStatusVal + 50;
 
                 counter += 1;
             }
@@ -285,11 +295,85 @@ namespace DocEdit
                 }
 
                 hasLoaded = false;
-                pbExecutionStatus.Value = 0;
-                lblPercentage.Text = "0%";
+                pBar1.Value = 0;
             }
             return true;
         }
         #endregion
+
+        #region Customized GUI
+
+        Point dragOffset;
+
+        // The x button control box and minimize control box
+        private void closeFormButtton_MouseEnter(object sender, EventArgs e)
+        {
+            closeFormButtton.Image = DocEdit.Properties.Resources.X_Hover;
+        }
+        private void closeFormButtton_MouseLeave(object sender, EventArgs e)
+        {
+            closeFormButtton.Image = DocEdit.Properties.Resources.X;
+        }
+        private void closeFormButtton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void minimizeBox_MouseEnter(object sender, EventArgs e)
+        {
+            minimizeBox.Image = DocEdit.Properties.Resources.Minimize_Hover;
+        }
+
+        private void minimizeBox_MouseLeave(object sender, EventArgs e)
+        {
+            minimizeBox.Image = DocEdit.Properties.Resources.Minimize;
+        }
+        private void minimizeBox_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        // Dragging the form during run time
+        private void menuStrip1_MouseDown(object sender, MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if (e.Button == MouseButtons.Left)
+            {
+                dragOffset = this.PointToScreen(e.Location);
+                var formLocation = FindForm().Location;
+                dragOffset.X -= formLocation.X;
+                dragOffset.Y -= formLocation.Y;
+            }
+        }
+        private void menuStrip1_MouseMove(object sender, MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            if (e.Button == MouseButtons.Left)
+            {
+                Point newLocation = this.PointToScreen(e.Location);
+
+                newLocation.X -= dragOffset.X;
+                newLocation.Y -= dragOffset.Y;
+
+                FindForm().Location = newLocation;
+            }
+        }
+        #endregion
+
+        private void btn_MouseEnter(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+            if (!(sender.Equals(btnUnload)))
+                control.BackColor = ColorTranslator.FromHtml("#8CD1FF");
+            else
+                control.BackColor = ColorTranslator.FromHtml("#F01D1D");
+        }
+
+        private void btn_MouseLeave(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+            control.BackColor = ColorTranslator.FromHtml("#4DB8FF");
+        }
+
     }
 }

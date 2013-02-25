@@ -68,7 +68,7 @@
             // logoPictureBox
             // 
             this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logoPictureBox.Image = global::DocEdit.Properties.Resources.logoPictureBox_Image;
+            this.logoPictureBox.Image = global::DocEdit.Properties.Resources.logoPictureBox;
             this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
             this.logoPictureBox.Name = "logoPictureBox";
             this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 6);

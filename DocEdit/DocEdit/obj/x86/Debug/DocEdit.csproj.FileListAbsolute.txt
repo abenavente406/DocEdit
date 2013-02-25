@@ -24,3 +24,6 @@ C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.csp
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.AboutBox1.resources
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.SplashScreen.resources
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.frmMain.resources
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.csprojResolveAssemblyReference.cache
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\bin\Debug\PBar.dll
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\bin\Debug\PBar.pdb

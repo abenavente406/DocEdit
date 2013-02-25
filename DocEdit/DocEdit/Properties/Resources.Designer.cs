@@ -73,9 +73,9 @@ namespace DocEdit.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap logoPictureBox_Image {
+        internal static System.Drawing.Bitmap logoPictureBox {
             get {
-                object obj = ResourceManager.GetObject("logoPictureBox.Image", resourceCulture);
+                object obj = ResourceManager.GetObject("logoPictureBox", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -86,6 +86,56 @@ namespace DocEdit.Properties {
         internal static System.Drawing.Bitmap logoPictureBox1 {
             get {
                 object obj = ResourceManager.GetObject("logoPictureBox1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Minimize {
+            get {
+                object obj = ResourceManager.GetObject("Minimize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Minimize_Hover {
+            get {
+                object obj = ResourceManager.GetObject("Minimize_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap X {
+            get {
+                object obj = ResourceManager.GetObject("X", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap X_Hover {
+            get {
+                object obj = ResourceManager.GetObject("X_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap X1 {
+            get {
+                object obj = ResourceManager.GetObject("X1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

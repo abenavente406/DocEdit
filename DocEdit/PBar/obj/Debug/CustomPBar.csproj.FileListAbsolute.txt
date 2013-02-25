@@ -1,0 +1,6 @@
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\PBar\bin\Debug\PBar.dll
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\PBar\bin\Debug\PBar.pdb
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\PBar\obj\Debug\PBar.PBar.resources
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\PBar\obj\Debug\CustomPBar.csproj.GenerateResource.Cache
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\PBar\obj\Debug\PBar.dll
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\PBar\obj\Debug\PBar.pdb
