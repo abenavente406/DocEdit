@@ -59,14 +59,14 @@ namespace DocEdit
 
         #region Fields
         // The word application to handle MSWord operations
-        Microsoft.Office.Interop.Word.Application wordApp = 
+        Microsoft.Office.Interop.Word.Application wordApp =
             new Microsoft.Office.Interop.Word.Application();
 
         // Create the documents to be manipulated
         Microsoft.Office.Interop.Word.Document loadedDoc;
         Microsoft.Office.Interop.Word.Document tmpDoc;
 
-        private int   pgNums   = 0;
+        private int pgNums = 0;
         private bool hasLoaded = false;
         private string tmpFilePath = System.IO.Directory.GetCurrentDirectory();
 
@@ -80,7 +80,7 @@ namespace DocEdit
             this.Size = new Size(371, 481);
             loadedDoc = new Microsoft.Office.Interop.Word.Document();
             tmpDoc = new Microsoft.Office.Interop.Word.Document();
-            
+
             // Set the theme
             RefreshTheme(Theme.NULL);
         }
@@ -317,7 +317,7 @@ namespace DocEdit
             // Find and delete the numbers + 
             for (int i = 1; i <= pgNums; i++)
             {
-                tmpDoc.Content.Find.Execute(FindText:"Slide " + i.ToString() + "\r\r", ReplaceWith: "",
+                tmpDoc.Content.Find.Execute(FindText: "Slide " + i.ToString() + "\r\r", ReplaceWith: "",
                     Replace: Microsoft.Office.Interop.Word.WdReplace.wdReplaceAll,
                     Wrap: Microsoft.Office.Interop.Word.WdFindWrap.wdFindContinue);
 
@@ -328,7 +328,7 @@ namespace DocEdit
         private void ScaleImage()
         {
             int tmpStatusVal = 0;
-            int    counter   = 0;
+            int counter = 0;
 
             foreach (Microsoft.Office.Interop.Word.InlineShape pict in tmpDoc.InlineShapes)
             {
@@ -346,19 +346,19 @@ namespace DocEdit
         #region Helper Functions
         private void PrintErrorMessage(string message, Exception ex)
         {
-            MessageBox.Show(this, message + "\n\n" + ex.Message, "ERROR", 
+            MessageBox.Show(this, message + "\n\n" + ex.Message, "ERROR",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void PrintErrorMessage(string message)
         {
-            MessageBox.Show(this, message, "ERROR", MessageBoxButtons.OK, 
+            MessageBox.Show(this, message, "ERROR", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
         }
 
         private void SaveTempPDF()
         {
             string tmpFilePathLocal = tmpFilePath + "\\preview.pdf";
-            tmpDoc.SaveAs2(FileName:tmpFilePathLocal, FileFormat:Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF);
+            tmpDoc.SaveAs2(FileName: tmpFilePathLocal, FileFormat: Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF);
             UpdatePDFReader(tmpFilePathLocal);
         }
 
@@ -392,11 +392,11 @@ namespace DocEdit
             if (AttemptCloseProgram())
                 Debug.Print("Closed with no errors!");
             wordApp = new Microsoft.Office.Interop.Word.Application();
-            
+
             pgNums = 0;
-            lblLoadedFile.Text    = "Loaded Doc: None";
+            lblLoadedFile.Text = "Loaded Doc: None";
             stslblFileLoaded.Text = "File Loaded: False";
-            lblPagesInDoc.Text    = "Pages in Document: " + pgNums.ToString();
+            lblPagesInDoc.Text = "Pages in Document: " + pgNums.ToString();
         }
 
         private bool AttemptCloseProgram()
@@ -432,39 +432,39 @@ namespace DocEdit
             if (newTheme != Theme.NULL)
                 Properties.Settings.Default.Theme = newTheme.ToString();
 
-            Theme theme = (Theme) Enum.Parse(typeof(Theme), Properties.Settings.Default.Theme);
+            Theme theme = (Theme)Enum.Parse(typeof(Theme), Properties.Settings.Default.Theme);
 
             switch (theme)
             {
                 case (Theme.DARK):
 
-                    textColor               = ColorTranslator.FromHtml(ColorTextDark);
-                    formBackColor           = ColorTranslator.FromHtml(ColorFormBackDark);
-                    menuStripsColor         = ColorTranslator.FromHtml(ColorMenuStripDark);
-                    toolStripsForeColor     = ColorTranslator.FromHtml(ColorToolStripDark);
-                    pBarBackColor           = ColorTranslator.FromHtml(ColorProgBarBackDark);
-                    pBarForeColor           = ColorTranslator.FromHtml(ColorProgBarForeDark);
-                    buttonsHoverColor       = ColorTranslator.FromHtml(ColorButtonsHoverDark);
-                    buttonsNoHoverColor     = ColorTranslator.FromHtml(ColorButtonsNoHoverDark);
+                    textColor = ColorTranslator.FromHtml(ColorTextDark);
+                    formBackColor = ColorTranslator.FromHtml(ColorFormBackDark);
+                    menuStripsColor = ColorTranslator.FromHtml(ColorMenuStripDark);
+                    toolStripsForeColor = ColorTranslator.FromHtml(ColorToolStripDark);
+                    pBarBackColor = ColorTranslator.FromHtml(ColorProgBarBackDark);
+                    pBarForeColor = ColorTranslator.FromHtml(ColorProgBarForeDark);
+                    buttonsHoverColor = ColorTranslator.FromHtml(ColorButtonsHoverDark);
+                    buttonsNoHoverColor = ColorTranslator.FromHtml(ColorButtonsNoHoverDark);
                     buttonsHoverUnloadColor = ColorTranslator.FromHtml(ColorButtonsHoverUnloadDark);
 
-                    imgXButton = DocEdit.Properties.Resources.X;
-                    imgXButtonHover = DocEdit.Properties.Resources.X_Hover;
-                    imgMinButton = DocEdit.Properties.Resources.Minimize;
-                    imgMinButtonHover = DocEdit.Properties.Resources.Minimize_Hover;
+                    imgXButton = Properties.Resources.X;
+                    imgXButtonHover = Properties.Resources.X_Hover;
+                    imgMinButton = Properties.Resources.Minimize;
+                    imgMinButtonHover = Properties.Resources.Minimize_Hover;
 
                     break;
 
                 case (Theme.LIGHT):
 
-                    textColor               = ColorTranslator.FromHtml(ColorTextLight);
-                    formBackColor           = ColorTranslator.FromHtml(ColorFormBackLight);
-                    menuStripsColor         = ColorTranslator.FromHtml(ColorMenuStripLight);
-                    toolStripsForeColor     = ColorTranslator.FromHtml(ColorToolStripLight);
-                    pBarBackColor           = ColorTranslator.FromHtml(ColorProgBarBackLight);
-                    pBarForeColor           = ColorTranslator.FromHtml(ColorProgBarForeLight);
-                    buttonsHoverColor       = ColorTranslator.FromHtml(ColorButtonsHoverLight);
-                    buttonsNoHoverColor     = ColorTranslator.FromHtml(ColorButtonsNoHoverLight);
+                    textColor = ColorTranslator.FromHtml(ColorTextLight);
+                    formBackColor = ColorTranslator.FromHtml(ColorFormBackLight);
+                    menuStripsColor = ColorTranslator.FromHtml(ColorMenuStripLight);
+                    toolStripsForeColor = ColorTranslator.FromHtml(ColorToolStripLight);
+                    pBarBackColor = ColorTranslator.FromHtml(ColorProgBarBackLight);
+                    pBarForeColor = ColorTranslator.FromHtml(ColorProgBarForeLight);
+                    buttonsHoverColor = ColorTranslator.FromHtml(ColorButtonsHoverLight);
+                    buttonsNoHoverColor = ColorTranslator.FromHtml(ColorButtonsNoHoverLight);
                     buttonsHoverUnloadColor = ColorTranslator.FromHtml(ColorButtonsHoverUnloadLight);
 
                     imgXButton = DocEdit.Properties.Resources.XLight;
