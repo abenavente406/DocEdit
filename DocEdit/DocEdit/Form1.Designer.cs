@@ -77,7 +77,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 425);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(683, 22);
-            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // stslblFileLoaded
@@ -99,7 +99,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(683, 24);
-            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseDown);
             this.menuStrip1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseMove);
@@ -235,7 +235,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 36);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(346, 90);
-            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Check the tasks you want enabled:";
             // 
@@ -249,7 +249,7 @@
             this.chkScaleSlides.Location = new System.Drawing.Point(11, 55);
             this.chkScaleSlides.Name = "chkScaleSlides";
             this.chkScaleSlides.Size = new System.Drawing.Size(171, 19);
-            this.chkScaleSlides.TabIndex = 0;
+            this.chkScaleSlides.TabIndex = 1;
             this.chkScaleSlides.Text = "Change Slide Size to 100%";
             this.chkScaleSlides.UseVisualStyleBackColor = true;
             // 
@@ -263,7 +263,7 @@
             this.chkDelSlideNums.Location = new System.Drawing.Point(11, 24);
             this.chkDelSlideNums.Name = "chkDelSlideNums";
             this.chkDelSlideNums.Size = new System.Drawing.Size(147, 19);
-            this.chkDelSlideNums.TabIndex = 0;
+            this.chkDelSlideNums.TabIndex = 1;
             this.chkDelSlideNums.Text = "Delete Slide Numbers";
             this.chkDelSlideNums.UseVisualStyleBackColor = true;
             // 
@@ -275,7 +275,7 @@
             this.btnLoadFile.Location = new System.Drawing.Point(12, 143);
             this.btnLoadFile.Name = "btnLoadFile";
             this.btnLoadFile.Size = new System.Drawing.Size(113, 24);
-            this.btnLoadFile.TabIndex = 6;
+            this.btnLoadFile.TabIndex = 1;
             this.btnLoadFile.Text = "Load File";
             this.btnLoadFile.UseVisualStyleBackColor = false;
             this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
@@ -290,7 +290,7 @@
             this.btnSaveFile.Location = new System.Drawing.Point(131, 143);
             this.btnSaveFile.Name = "btnSaveFile";
             this.btnSaveFile.Size = new System.Drawing.Size(113, 24);
-            this.btnSaveFile.TabIndex = 6;
+            this.btnSaveFile.TabIndex = 2;
             this.btnSaveFile.Text = "Save File";
             this.btnSaveFile.UseVisualStyleBackColor = false;
             this.btnSaveFile.Click += new System.EventHandler(this.btnSaveFile_Click);
@@ -305,7 +305,7 @@
             this.btnPreview.Location = new System.Drawing.Point(11, 185);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(113, 24);
-            this.btnPreview.TabIndex = 6;
+            this.btnPreview.TabIndex = 4;
             this.btnPreview.Text = "Preview";
             this.btnPreview.UseVisualStyleBackColor = false;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
@@ -321,7 +321,7 @@
             this.lblPagesInDoc.Location = new System.Drawing.Point(8, 275);
             this.lblPagesInDoc.Name = "lblPagesInDoc";
             this.lblPagesInDoc.Size = new System.Drawing.Size(127, 13);
-            this.lblPagesInDoc.TabIndex = 7;
+            this.lblPagesInDoc.TabIndex = 0;
             this.lblPagesInDoc.Text = "Pages in document: 0";
             // 
             // lblLoadedFile
@@ -333,7 +333,7 @@
             this.lblLoadedFile.Location = new System.Drawing.Point(8, 300);
             this.lblLoadedFile.Name = "lblLoadedFile";
             this.lblLoadedFile.Size = new System.Drawing.Size(103, 13);
-            this.lblLoadedFile.TabIndex = 7;
+            this.lblLoadedFile.TabIndex = 0;
             this.lblLoadedFile.Text = "Loaded Doc: None";
             // 
             // btnExecute
@@ -345,7 +345,7 @@
             this.btnExecute.Location = new System.Drawing.Point(11, 387);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(113, 24);
-            this.btnExecute.TabIndex = 6;
+            this.btnExecute.TabIndex = 3;
             this.btnExecute.Text = "Execute";
             this.btnExecute.UseVisualStyleBackColor = false;
             this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
@@ -360,7 +360,7 @@
             this.btnUnload.Location = new System.Drawing.Point(12, 226);
             this.btnUnload.Name = "btnUnload";
             this.btnUnload.Size = new System.Drawing.Size(113, 24);
-            this.btnUnload.TabIndex = 6;
+            this.btnUnload.TabIndex = 5;
             this.btnUnload.Text = "Unload File";
             this.toolTip1.SetToolTip(this.btnUnload, "Unstable Feature");
             this.btnUnload.UseVisualStyleBackColor = false;
@@ -388,7 +388,7 @@
             this.pdfReader.Name = "pdfReader";
             this.pdfReader.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("pdfReader.OcxState")));
             this.pdfReader.Size = new System.Drawing.Size(270, 374);
-            this.pdfReader.TabIndex = 8;
+            this.pdfReader.TabIndex = 0;
             this.pdfReader.Visible = false;
             // 
             // pBar1
@@ -399,7 +399,7 @@
             this.pBar1.Location = new System.Drawing.Point(11, 340);
             this.pBar1.Name = "pBar1";
             this.pBar1.Size = new System.Drawing.Size(347, 27);
-            this.pBar1.TabIndex = 10;
+            this.pBar1.TabIndex = 0;
             this.pBar1.TextColor = System.Drawing.Color.Black;
             this.pBar1.Value = 0F;
             // 
