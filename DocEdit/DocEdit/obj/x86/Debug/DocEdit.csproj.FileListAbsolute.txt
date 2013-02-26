@@ -27,3 +27,4 @@ C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.frm
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\obj\x86\Debug\DocEdit.csprojResolveAssemblyReference.cache
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\bin\Debug\PBar.dll
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\bin\Debug\PBar.pdb
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\DocEdit\bin\Debug\Doc Edit.exe.config

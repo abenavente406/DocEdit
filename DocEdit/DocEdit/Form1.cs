@@ -8,19 +8,38 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Configuration;
 using Microsoft.Office;
 
 namespace DocEdit
 {
     public enum Theme
     {
-        LIGHT, DARK
+        LIGHT, DARK, NULL
     }
 
     public partial class frmMain : Form
     {
         #region Theme Variables
-        Theme theme = Theme.LIGHT;
+        const string ColorFormBackLight = "#F2F2F9";
+        const string ColorButtonsNoHoverLight = "#BDB2B7";
+        const string ColorButtonsHoverLight = "#BCD1FF";
+        const string ColorButtonsHoverUnloadLight = "#F01D1D";
+        const string ColorMenuStripLight = "#F6FBF3";
+        const string ColorToolStripLight = "#F6FBF3";
+        const string ColorProgBarBackLight = "#DCDCDC";
+        const string ColorProgBarForeLight = "#FF8000";
+        const string ColorTextLight = "#000000";
+
+        const string ColorFormBackDark = "#3F3F3F";
+        const string ColorButtonsNoHoverDark = "#4DB8FF";
+        const string ColorButtonsHoverDark = "#8CD1FF";
+        const string ColorButtonsHoverUnloadDark = "#F01D1D";
+        const string ColorMenuStripDark = "#040404";
+        const string ColorToolStripDark = "#040404";
+        const string ColorProgBarBackDark = "#A9A9A9";
+        const string ColorProgBarForeDark = "#B1FF7D";
+        const string ColorTextDark = "#FFFFFF";
 
         Color formBackColor = Color.FromArgb(242, 242, 249);
         Color menuStripsColor = Color.FromArgb(246, 251, 243);
@@ -61,7 +80,7 @@ namespace DocEdit
             this.Size = new Size(371, 481);
             loadedDoc = new Microsoft.Office.Interop.Word.Document();
             tmpDoc = new Microsoft.Office.Interop.Word.Document();
-            RefreshTheme();
+            RefreshTheme(Theme.NULL);
         }
 
         #region Controls
@@ -190,27 +209,11 @@ namespace DocEdit
         }
         private void lightThemeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!(theme == Theme.LIGHT))
-            {
-                theme = Theme.LIGHT;
-                RefreshTheme();
-            }
-            else
-            {
-                PrintErrorMessage("This theme is already selected.");
-            }
+            RefreshTheme(Theme.LIGHT);
         }
         private void darkThemeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!(theme == Theme.DARK))
-            {
-                theme = Theme.DARK;
-                RefreshTheme();
-            }
-            else
-            {
-                PrintErrorMessage("This theme is already selected.");
-            }
+            RefreshTheme(Theme.DARK);
         }
 
         // The x button control box and minimize control box
@@ -420,20 +423,40 @@ namespace DocEdit
         #endregion
 
         #region Customized GUI
-        private void RefreshTheme()
+        private void RefreshTheme(Theme newTheme)
         {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (newTheme != Theme.NULL)
+            {
+                Properties.Settings.Default.Theme = newTheme.ToString();
+            }
+
+            Theme theme = (Theme) Enum.Parse(typeof(Theme), Properties.Settings.Default.Theme);
+
             switch (theme)
             {
                 case (Theme.DARK):
-                    formBackColor = Color.FromArgb(63, 63, 63);
-                    buttonsHoverColor = Color.FromArgb(140, 209, 255);
-                    buttonsNoHoverColor = Color.FromArgb(77, 184, 255);
-                    buttonsHoverUnloadColor = Color.FromArgb(240, 29, 29);
-                    menuStripsColor = Color.FromArgb(4, 4, 4);
-                    toolStripsForeColor = Color.White;
-                    pBarBackColor = Color.DarkGray;
-                    pBarForeColor = Color.FromArgb(177, 255, 125);
-                    textColor = Color.White;
+
+                    formBackColor = ColorTranslator.FromHtml(ColorFormBackDark);
+                    buttonsNoHoverColor = ColorTranslator.FromHtml(ColorButtonsNoHoverDark);
+                    buttonsHoverColor = ColorTranslator.FromHtml(ColorButtonsHoverDark);
+                    buttonsHoverUnloadColor = ColorTranslator.FromHtml(ColorButtonsHoverUnloadDark);
+                    menuStripsColor = ColorTranslator.FromHtml(ColorMenuStripDark);
+                    toolStripsForeColor = ColorTranslator.FromHtml(ColorToolStripDark);
+                    pBarBackColor = ColorTranslator.FromHtml(ColorProgBarBackDark);
+                    pBarForeColor = ColorTranslator.FromHtml(ColorProgBarForeDark);
+                    textColor = ColorTranslator.FromHtml(ColorTextDark);
+
+                    Properties.Settings.Default.ColorButtonsHover = ColorButtonsHoverDark;
+                    Properties.Settings.Default.ColorButtonsHoverUnload = ColorButtonsHoverUnloadDark;
+                    Properties.Settings.Default.ColorButtonsNoHover = ColorButtonsNoHoverDark;
+                    Properties.Settings.Default.ColorFormBack = ColorFormBackDark;
+                    Properties.Settings.Default.ColorMenuStrip = ColorMenuStripDark;
+                    Properties.Settings.Default.ColorProgBarBack = ColorProgBarBackDark;
+                    Properties.Settings.Default.ColorProgBarFore = ColorProgBarForeDark;
+                    Properties.Settings.Default.ColorText = ColorTextDark;
+                    Properties.Settings.Default.ColorToolStrip = ColorToolStripDark;
 
                     imgXButton = DocEdit.Properties.Resources.X;
                     imgXButtonHover = DocEdit.Properties.Resources.X_Hover;
@@ -443,15 +466,26 @@ namespace DocEdit
                     break;
 
                 case (Theme.LIGHT):
-                    formBackColor = Color.FromArgb(242, 242, 249);
-                    menuStripsColor = Color.FromArgb(246, 251, 243);
-                    toolStripsForeColor = Color.Black;
-                    buttonsNoHoverColor = Color.FromArgb(189, 178, 183);
-                    buttonsHoverColor = ColorTranslator.FromHtml("#757072");
-                    buttonsHoverUnloadColor = ColorTranslator.FromHtml("#F01D1D");
-                    pBarBackColor = Color.Gainsboro;
-                    pBarForeColor = Color.FromArgb(255, 128, 0);
-                    textColor = Color.Black;
+
+                    formBackColor = ColorTranslator.FromHtml(ColorFormBackLight);
+                    buttonsNoHoverColor = ColorTranslator.FromHtml(ColorButtonsNoHoverLight);
+                    buttonsHoverColor = ColorTranslator.FromHtml(ColorButtonsHoverLight);
+                    buttonsHoverUnloadColor = ColorTranslator.FromHtml(ColorButtonsHoverUnloadLight);
+                    menuStripsColor = ColorTranslator.FromHtml(ColorMenuStripLight);
+                    toolStripsForeColor = ColorTranslator.FromHtml(ColorToolStripLight);
+                    pBarBackColor = ColorTranslator.FromHtml(ColorProgBarBackLight);
+                    pBarForeColor = ColorTranslator.FromHtml(ColorProgBarForeLight);
+                    textColor = ColorTranslator.FromHtml(ColorTextLight);
+
+                    Properties.Settings.Default.ColorButtonsHover = ColorButtonsHoverLight;
+                    Properties.Settings.Default.ColorButtonsHoverUnload = ColorButtonsHoverUnloadLight;
+                    Properties.Settings.Default.ColorButtonsNoHover = ColorButtonsNoHoverLight;
+                    Properties.Settings.Default.ColorFormBack = ColorFormBackLight;
+                    Properties.Settings.Default.ColorMenuStrip = ColorMenuStripLight;
+                    Properties.Settings.Default.ColorProgBarBack = ColorProgBarBackLight;
+                    Properties.Settings.Default.ColorProgBarFore = ColorProgBarForeLight;
+                    Properties.Settings.Default.ColorText = ColorTextLight;
+                    Properties.Settings.Default.ColorToolStrip = ColorToolStripLight;
 
                     imgXButton = DocEdit.Properties.Resources.XLight;
                     imgXButtonHover = DocEdit.Properties.Resources.X_HoverLight;
@@ -460,6 +494,8 @@ namespace DocEdit
 
                     break;
             }
+
+            Properties.Settings.Default.Save();
 
             this.BackColor = formBackColor;
 
@@ -477,9 +513,9 @@ namespace DocEdit
                         foreach (ToolStripMenuItem i in t.DropDownItems)
                         {
                             t.BackColor = menuStripsColor;
-                            t.ForeColor = toolStripsForeColor;
+                            t.ForeColor = textColor;
                             i.BackColor = menuStripsColor;
-                            i.ForeColor = toolStripsForeColor;
+                            i.ForeColor = textColor;
                         }
                     }
                     c.BackColor = menuStripsColor;

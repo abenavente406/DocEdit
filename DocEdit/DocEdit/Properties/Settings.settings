@@ -1,7 +1,36 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DocEdit.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ColorFormBack" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#F2F2F9</Value>
+    </Setting>
+    <Setting Name="ColorButtonsNoHover" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#BDB2B7</Value>
+    </Setting>
+    <Setting Name="ColorButtonsHover" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#8CD1FF</Value>
+    </Setting>
+    <Setting Name="ColorButtonsHoverUnload" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#F01D1D</Value>
+    </Setting>
+    <Setting Name="ColorMenuStrip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#F6FBF3</Value>
+    </Setting>
+    <Setting Name="ColorToolStrip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#F6FBF3</Value>
+    </Setting>
+    <Setting Name="ColorProgBarBack" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#DCDCDC</Value>
+    </Setting>
+    <Setting Name="ColorProgBarFore" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF8000</Value>
+    </Setting>
+    <Setting Name="ColorText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFFFF</Value>
+    </Setting>
+    <Setting Name="Theme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LIGHT</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
