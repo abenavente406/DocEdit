@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Media;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
@@ -122,6 +120,8 @@ namespace DocEdit
 
                 SaveTempPDF();
                 pdfReader.Refresh();
+
+                System.Media.SystemSounds.Beep.Play();
             }
             catch (System.Runtime.InteropServices.COMException ex)
             {
@@ -321,7 +321,7 @@ namespace DocEdit
                     Replace: Microsoft.Office.Interop.Word.WdReplace.wdReplaceAll,
                     Wrap: Microsoft.Office.Interop.Word.WdFindWrap.wdFindContinue);
 
-                pBar1.Value = (i / pgNums) * 50;
+                pBar1.Value = (int)((i * 100 / pgNums) / 2);
             }
         }
 
@@ -330,12 +330,12 @@ namespace DocEdit
             int tmpStatusVal = 0;
             int counter = 0;
 
-            foreach (Microsoft.Office.Interop.Word.InlineShape pict in tmpDoc.InlineShapes)
+            foreach (Microsoft.Office.Interop.Word.InlineShape slide in tmpDoc.InlineShapes)
             {
-                pict.ScaleWidth = 100;
-                pict.ScaleHeight = 100;
+                slide.ScaleWidth = 100;
+                slide.ScaleHeight = 100;
 
-                tmpStatusVal = (counter / pgNums) * 50;
+                tmpStatusVal = (int)((counter * 100 / pgNums) / 2);
                 pBar1.Value = tmpStatusVal + 50;
 
                 counter += 1;

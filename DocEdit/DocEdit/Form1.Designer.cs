@@ -327,12 +327,11 @@
             // lblLoadedFile
             // 
             this.lblLoadedFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblLoadedFile.AutoSize = true;
             this.lblLoadedFile.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoadedFile.ForeColor = System.Drawing.Color.Black;
             this.lblLoadedFile.Location = new System.Drawing.Point(8, 300);
             this.lblLoadedFile.Name = "lblLoadedFile";
-            this.lblLoadedFile.Size = new System.Drawing.Size(103, 13);
+            this.lblLoadedFile.Size = new System.Drawing.Size(350, 37);
             this.lblLoadedFile.TabIndex = 0;
             this.lblLoadedFile.Text = "Loaded Doc: None";
             // 
@@ -371,6 +370,7 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
+            this.openFileDialog.Filter = "Microsoft Word Documents (*.docx/*.doc)|*.docx;*.doc|All Files (*.*)|*.*";
             this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
             // saveFileDialog
