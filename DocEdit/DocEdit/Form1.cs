@@ -19,25 +19,25 @@ namespace DocEdit
     public partial class frmMain : Form
     {
         #region Theme Variables
-        const string ColorTextLight = "#000000";
-        const string ColorFormBackLight = "#F2F2F9";
-        const string ColorMenuStripLight = "#F6FBF3";
-        const string ColorToolStripLight = "#F6FBF3";
-        const string ColorProgBarForeLight = "#FF8000";
-        const string ColorProgBarBackLight = "#DCDCDC";
-        const string ColorButtonsHoverLight = "#BCD1FF";
-        const string ColorButtonsNoHoverLight = "#BDB2B7";
+        const string ColorTextLight               = "#000000";
+        const string ColorFormBackLight           = "#F2F2F9";
+        const string ColorMenuStripLight          = "#F6FBF3";
+        const string ColorToolStripLight          = "#F6FBF3";
+        const string ColorProgBarForeLight        = "#FF8000";
+        const string ColorProgBarBackLight        = "#DCDCDC";
+        const string ColorButtonsHoverLight       = "#BCD1FF";
+        const string ColorButtonsNoHoverLight     = "#BDB2B7";
         const string ColorButtonsHoverUnloadLight = "#F01D1D";
 
-        const string ColorTextDark = "#FFFFFF";
-        const string ColorFormBackDark = "#3F3F3F";
-        const string ColorMenuStripDark = "#040404";
-        const string ColorToolStripDark = "#040404";
-        const string ColorProgBarBackDark = "#A9A9A9";
-        const string ColorProgBarForeDark = "#B1FF7D";
-        const string ColorButtonsHoverDark = "#8CD1FF";
-        const string ColorButtonsNoHoverDark = "#4DB8FF";
-        const string ColorButtonsHoverUnloadDark = "#F01D1D";
+        const string ColorTextDark                = "#FFFFFF";
+        const string ColorFormBackDark            = "#3F3F3F";
+        const string ColorMenuStripDark           = "#040404";
+        const string ColorToolStripDark           = "#040404";
+        const string ColorProgBarBackDark         = "#A9A9A9";
+        const string ColorProgBarForeDark         = "#B1FF7D";
+        const string ColorButtonsHoverDark        = "#8CD1FF";
+        const string ColorButtonsNoHoverDark      = "#4DB8FF";
+        const string ColorButtonsHoverUnloadDark  = "#F01D1D";
 
         Color textColor;
         Color formBackColor;
@@ -75,9 +75,9 @@ namespace DocEdit
         public frmMain()
         {
             InitializeComponent();
-            this.Size = new Size(371, 481);
+            Size = new Size(371, 481);
             loadedDoc = new Microsoft.Office.Interop.Word.Document();
-            tmpDoc = new Microsoft.Office.Interop.Word.Document();
+            tmpDoc    = new Microsoft.Office.Interop.Word.Document();
 
             // Set the theme
             RefreshTheme(Theme.NULL);
@@ -107,14 +107,14 @@ namespace DocEdit
 
                 hasLoaded = true;
 
-                this.Size = new Size(Screen.GetWorkingArea(this.Bounds).Width,
-                    Screen.GetWorkingArea(this.Bounds).Height);
-                this.Location = new Point(0, 0);
+                Size = new Size(Screen.GetWorkingArea(Bounds).Width,
+                    Screen.GetWorkingArea(Bounds).Height);
+                Location = new Point(0, 0);
 
-                lblLoadedFile.Text = "Loaded Doc: " + loadedDoc.Path + "\\" + loadedDoc.Name;
+                lblLoadedFile.Text    = "Loaded Doc: " + loadedDoc.Path + "\\" + loadedDoc.Name;
                 stslblFileLoaded.Text = "File Loaded: True";
-                pgNums = loadedDoc.ComputeStatistics(Microsoft.Office.Interop.Word.WdStatistic.wdStatisticPages);
-                lblPagesInDoc.Text = "Pages in Document: " + pgNums.ToString();
+                pgNums                = loadedDoc.ComputeStatistics(Microsoft.Office.Interop.Word.WdStatistic.wdStatisticPages);
+                lblPagesInDoc.Text    = "Pages in Document: " + pgNums.ToString();
 
                 pdfReader.Visible = true;
 
@@ -438,38 +438,38 @@ namespace DocEdit
             {
                 case (Theme.DARK):
 
-                    textColor = ColorTranslator.FromHtml(ColorTextDark);
-                    formBackColor = ColorTranslator.FromHtml(ColorFormBackDark);
-                    menuStripsColor = ColorTranslator.FromHtml(ColorMenuStripDark);
-                    toolStripsForeColor = ColorTranslator.FromHtml(ColorToolStripDark);
-                    pBarBackColor = ColorTranslator.FromHtml(ColorProgBarBackDark);
-                    pBarForeColor = ColorTranslator.FromHtml(ColorProgBarForeDark);
-                    buttonsHoverColor = ColorTranslator.FromHtml(ColorButtonsHoverDark);
-                    buttonsNoHoverColor = ColorTranslator.FromHtml(ColorButtonsNoHoverDark);
+                    textColor               = ColorTranslator.FromHtml(ColorTextDark);
+                    formBackColor           = ColorTranslator.FromHtml(ColorFormBackDark);
+                    menuStripsColor         = ColorTranslator.FromHtml(ColorMenuStripDark);
+                    toolStripsForeColor     = ColorTranslator.FromHtml(ColorToolStripDark);
+                    pBarBackColor           = ColorTranslator.FromHtml(ColorProgBarBackDark);
+                    pBarForeColor           = ColorTranslator.FromHtml(ColorProgBarForeDark);
+                    buttonsHoverColor       = ColorTranslator.FromHtml(ColorButtonsHoverDark);
+                    buttonsNoHoverColor     = ColorTranslator.FromHtml(ColorButtonsNoHoverDark);
                     buttonsHoverUnloadColor = ColorTranslator.FromHtml(ColorButtonsHoverUnloadDark);
 
-                    imgXButton = Properties.Resources.X;
-                    imgXButtonHover = Properties.Resources.X_Hover;
-                    imgMinButton = Properties.Resources.Minimize;
+                    imgXButton        = Properties.Resources.X;
+                    imgXButtonHover   = Properties.Resources.X_Hover;
+                    imgMinButton      = Properties.Resources.Minimize;
                     imgMinButtonHover = Properties.Resources.Minimize_Hover;
 
                     break;
 
                 case (Theme.LIGHT):
 
-                    textColor = ColorTranslator.FromHtml(ColorTextLight);
-                    formBackColor = ColorTranslator.FromHtml(ColorFormBackLight);
-                    menuStripsColor = ColorTranslator.FromHtml(ColorMenuStripLight);
-                    toolStripsForeColor = ColorTranslator.FromHtml(ColorToolStripLight);
-                    pBarBackColor = ColorTranslator.FromHtml(ColorProgBarBackLight);
-                    pBarForeColor = ColorTranslator.FromHtml(ColorProgBarForeLight);
-                    buttonsHoverColor = ColorTranslator.FromHtml(ColorButtonsHoverLight);
-                    buttonsNoHoverColor = ColorTranslator.FromHtml(ColorButtonsNoHoverLight);
+                    textColor               = ColorTranslator.FromHtml(ColorTextLight);
+                    formBackColor           = ColorTranslator.FromHtml(ColorFormBackLight);
+                    menuStripsColor         = ColorTranslator.FromHtml(ColorMenuStripLight);
+                    toolStripsForeColor     = ColorTranslator.FromHtml(ColorToolStripLight);
+                    pBarBackColor           = ColorTranslator.FromHtml(ColorProgBarBackLight);
+                    pBarForeColor           = ColorTranslator.FromHtml(ColorProgBarForeLight);
+                    buttonsHoverColor       = ColorTranslator.FromHtml(ColorButtonsHoverLight);
+                    buttonsNoHoverColor     = ColorTranslator.FromHtml(ColorButtonsNoHoverLight);
                     buttonsHoverUnloadColor = ColorTranslator.FromHtml(ColorButtonsHoverUnloadLight);
 
-                    imgXButton = DocEdit.Properties.Resources.XLight;
-                    imgXButtonHover = DocEdit.Properties.Resources.X_HoverLight;
-                    imgMinButton = DocEdit.Properties.Resources.MinimizeLight;
+                    imgXButton        = DocEdit.Properties.Resources.XLight;
+                    imgXButtonHover   = DocEdit.Properties.Resources.X_HoverLight;
+                    imgMinButton      = DocEdit.Properties.Resources.MinimizeLight;
                     imgMinButtonHover = DocEdit.Properties.Resources.Minimize_HoverLight;
 
                     break;
@@ -477,7 +477,7 @@ namespace DocEdit
 
             Properties.Settings.Default.Save();
 
-            this.BackColor = formBackColor;
+            BackColor = formBackColor;
             foreach (Control c in this.Controls)
             {
                 if (c is Button)
@@ -508,12 +508,12 @@ namespace DocEdit
                 c.ForeColor = textColor;
             }
 
-            pBar1.BackColor = pBarBackColor;
-            pBar1.ForeColor = pBarForeColor;
+            pBar1.BackColor        = pBarBackColor;
+            pBar1.ForeColor        = pBarForeColor;
             statusStrip1.BackColor = menuStripsColor;
             statusStrip1.ForeColor = textColor;
             closeFormButtton.Image = imgXButton;
-            minimizeBox.Image = imgMinButton;
+            minimizeBox.Image      = imgMinButton;
         }
         #endregion
     }
