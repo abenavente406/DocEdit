@@ -4,3 +4,4 @@ C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\PBar\obj\Debug\PBar.PBar.resource
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\PBar\obj\Debug\CustomPBar.csproj.GenerateResource.Cache
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\PBar\obj\Debug\PBar.dll
 C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\PBar\obj\Debug\PBar.pdb
+C:\Users\Anthony Benavente\Git\DocEdit\DocEdit\PBar\obj\Debug\CustomPBar.csprojResolveAssemblyReference.cache

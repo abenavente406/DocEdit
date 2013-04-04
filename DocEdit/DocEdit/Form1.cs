@@ -72,6 +72,7 @@ namespace DocEdit
         Point dragOffset;
         #endregion
 
+        #region Initialization
         public frmMain()
         {
             InitializeComponent();
@@ -82,6 +83,7 @@ namespace DocEdit
             // Set the theme
             RefreshTheme(Theme.NULL);
         }
+        #endregion
 
         #region Controls
         private void btnLoadFile_Click(object sender, EventArgs e)
@@ -94,7 +96,7 @@ namespace DocEdit
             {
                 var fileInfo = new System.IO.FileInfo(openFileDialog.FileName);
 
-                // If the file is bigger than 30 mb
+                // If the file is bigger than 30 mb, warn the user
                 if (fileInfo.Length * (9.35 * Math.Pow(10, -7)) > 30)
                     MessageBox.Show("This is a relatively large file.  Please allow load times in between 1 - 2 minutes.",
                         "BIG FILE", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -308,6 +310,11 @@ namespace DocEdit
             {
                 PrintErrorMessage("ERROR! Could not exit a winword task.", ex);
             }
+        }
+
+        private void BgWorker_DoWord(object sender, DoWorkEventArgs e)
+        {
+
         }
         #endregion
 
