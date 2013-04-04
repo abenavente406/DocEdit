@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Configuration;
+using System.Threading;
 using Microsoft.Office;
 
 namespace DocEdit
@@ -70,6 +71,8 @@ namespace DocEdit
 
         // Pont of reference when dragging the form
         Point dragOffset;
+
+        BackgroundWorker bgWorker;
         #endregion
 
         #region Initialization
@@ -80,6 +83,15 @@ namespace DocEdit
             loadedDoc = new Microsoft.Office.Interop.Word.Document();
             tmpDoc = new Microsoft.Office.Interop.Word.Document();
 
+            bgWorker = new BackgroundWorker()
+            {
+                WorkerSupportsCancellation = true,
+                WorkerReportsProgress = true,
+            };
+            bgWorker.DoWork += new DoWorkEventHandler(BgWorker_DoWork);
+            bgWorker.ProgressChanged += new ProgressChangedEventHandler(BgWorker_ProgressChanged);
+            bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgWorker_OnFinish);
+
             // Set the theme
             RefreshTheme(Theme.NULL);
         }
@@ -88,7 +100,10 @@ namespace DocEdit
         #region Controls
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
-            openFileDialog.ShowDialog();
+            if (!bgWorker.IsBusy)
+                openFileDialog.ShowDialog();
+            else
+                PrintErrorMessage("A file is currently being processed!");
         }
         private void openFileDialog_FileOk(object sender, CancelEventArgs e)
         {
@@ -137,10 +152,10 @@ namespace DocEdit
         }
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
-            if (hasLoaded)
+            if (hasLoaded && !bgWorker.IsBusy)
                 saveFileDialog.ShowDialog();
             else
-                PrintErrorMessage("No file has been loaded!");
+                PrintErrorMessage("Could not save the file!  A file may be currently processed.");
         }
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
@@ -167,46 +182,34 @@ namespace DocEdit
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
-            if (hasLoaded)
+            if (hasLoaded && !bgWorker.IsBusy)
             {
-                if (chkDelSlideNums.Checked)
-                    DeleteSlideNums();
-
-                if (chkScaleSlides.Checked)
-                    ScaleImage();
-
-                SaveTempPDF();
-                MessageBox.Show(this, "Finished executing tasks.", "Finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                pBar1.Value = 100;
+                bgWorker.RunWorkerAsync();
             }
             else
-                PrintErrorMessage("No file is loaded!");
+                PrintErrorMessage("Commands could not execute!  A file may be being processed already.");
         }
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            if (hasLoaded)
+            if (hasLoaded && !bgWorker.IsBusy)
                 PreviewPDF();
             else
-                PrintErrorMessage("No file has been loaded!");
+                PrintErrorMessage("Could not preview the file! The file may be being processed.");
         }
 
         private void btnUnload_Click(object sender, EventArgs e)
         {
-            if (hasLoaded)
+            if (hasLoaded && !bgWorker.IsBusy)
             {
                 if (MessageBox.Show(this, "WARNING! This feature is very unstable.  Will you still continue?",
                   "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     Reset();
             }
             else
-                PrintErrorMessage("No file has been loaded!");
+                PrintErrorMessage("Could not unload the file!  A file may be currently processing.");
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutBox1().ShowDialog();
@@ -228,10 +231,6 @@ namespace DocEdit
         private void closeFormButtton_MouseLeave(object sender, EventArgs e)
         {
             closeFormButtton.Image = imgXButton;
-        }
-        private void closeFormButtton_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void minimizeBox_MouseEnter(object sender, EventArgs e)
@@ -273,6 +272,7 @@ namespace DocEdit
                 FindForm().Location = newLocation;
             }
         }
+
         // Changing button colors when the mouse enters
         private void btn_MouseEnter(object sender, EventArgs e)
         {
@@ -286,6 +286,42 @@ namespace DocEdit
         {
             Control control = sender as Control;
             control.BackColor = buttonsNoHoverColor;
+        }
+
+        private void BgWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var bw = sender as BackgroundWorker;
+            for (int i = 1; i <= pgNums; i++)
+            {
+                tmpDoc.Content.Find.Execute(
+                    FindText: "Slide " + i.ToString() + "\r\r", ReplaceWith: "",
+                    Replace: Microsoft.Office.Interop.Word.WdReplace.wdReplaceAll,
+                    Wrap: Microsoft.Office.Interop.Word.WdFindWrap.wdFindContinue);
+
+                bw.ReportProgress((int)((i * 100 / pgNums) / 2));
+            }
+
+            int counter = 0;
+
+            foreach (Microsoft.Office.Interop.Word.InlineShape slide in tmpDoc.InlineShapes)
+            {
+                slide.ScaleWidth = 100;
+                slide.ScaleHeight = 100;
+
+                bw.ReportProgress((int)((counter * 100 / pgNums) / 2) + 50);
+                counter += 1;
+            }
+
+            bw.ReportProgress((int)((counter * 100 / pgNums) / 2) + 50);
+        }
+        private void BgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            pBar1.Value = e.ProgressPercentage;
+        }
+        private void BgWorker_OnFinish(object sender, RunWorkerCompletedEventArgs e)
+        {
+            SaveTempPDF();
+            MessageBox.Show(this, "Finished executing tasks.", "Finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -310,11 +346,6 @@ namespace DocEdit
             {
                 PrintErrorMessage("ERROR! Could not exit a winword task.", ex);
             }
-        }
-
-        private void BgWorker_DoWord(object sender, DoWorkEventArgs e)
-        {
-
         }
         #endregion
 
@@ -428,6 +459,11 @@ namespace DocEdit
                 pBar1.Value = 0;
             }
             return true;
+        }
+
+        private void CloseProgram(object sender, EventArgs e)
+        {
+            this.Close();
         }
         #endregion
 

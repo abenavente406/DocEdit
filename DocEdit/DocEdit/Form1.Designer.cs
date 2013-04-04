@@ -125,7 +125,7 @@
             this.openToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
@@ -136,7 +136,7 @@
             this.saveAsToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.btnSaveFile_Click);
             // 
@@ -147,9 +147,9 @@
             this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.CloseProgram);
             // 
             // viewToolStripMenuItem
             // 
@@ -427,7 +427,7 @@
             this.closeFormButtton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.closeFormButtton.TabIndex = 9;
             this.closeFormButtton.TabStop = false;
-            this.closeFormButtton.Click += new System.EventHandler(this.closeFormButtton_Click);
+            this.closeFormButtton.Click += new System.EventHandler(this.CloseProgram);
             this.closeFormButtton.MouseEnter += new System.EventHandler(this.closeFormButtton_MouseEnter);
             this.closeFormButtton.MouseLeave += new System.EventHandler(this.closeFormButtton_MouseLeave);
             // 
